@@ -25,3 +25,15 @@ export function formatDate(iso, options = { month: 'short', day: 'numeric', year
     return '—';
   }
 }
+
+/** Format an ISO timestamp string as e.g. "Oct 25, 2026". */
+export function formatTimestamp(isoString) {
+  if (!isoString) return '—';
+  try {
+    const d = new Date(isoString);
+    if (Number.isNaN(d.getTime())) return '—';
+    return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch {
+    return '—';
+  }
+}
