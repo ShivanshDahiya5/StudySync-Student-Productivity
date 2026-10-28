@@ -9,3 +9,9 @@ export function toISODate(date) {
 export function todayISO() {
   return toISODate(new Date());
 }
+
+/** Parse a YYYY-MM-DD string into a local Date at midnight. */
+export function parseISO(iso) {
+  const [y, m, d] = String(iso).split('-').map(Number);
+  return new Date(y, (m || 1) - 1, d || 1);
+}
