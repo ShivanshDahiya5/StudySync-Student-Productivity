@@ -15,3 +15,13 @@ export function parseISO(iso) {
   const [y, m, d] = String(iso).split('-').map(Number);
   return new Date(y, (m || 1) - 1, d || 1);
 }
+
+/** Format as e.g. "Oct 25, 2026". */
+export function formatDate(iso, options = { month: 'short', day: 'numeric', year: 'numeric' }) {
+  if (!iso) return '—';
+  try {
+    return parseISO(iso).toLocaleDateString(undefined, options);
+  } catch {
+    return '—';
+  }
+}
