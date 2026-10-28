@@ -4,3 +4,8 @@ export function toISODate(date) {
   const d = String(date.getDate()).padStart(2, '0');
   return `${y}-${m}-${d}`;
 }
+
+/** Today's local calendar date as YYYY-MM-DD. */
+export function todayISO() {
+  return toISODate(new Date());
+}
