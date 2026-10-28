@@ -17,3 +17,11 @@ export function useLocalStorage(key, initialValue) {
     try {
       window.localStorage.setItem(key, JSON.stringify(value));
     } catch (err) {
+      console.warn(`useLocalStorage: failed to write key "${key}"`, err);
+    }
+  }, [key, value]);
+
+  return [value, setValue];
+}
+
+export default useLocalStorage;
