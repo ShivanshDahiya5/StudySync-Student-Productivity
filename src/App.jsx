@@ -7,3 +7,13 @@ import Calendar from './pages/Calendar';
 import Subjects from './pages/Subjects';
 import Analytics from './pages/Analytics';
 import Settings from './pages/Settings';
+
+export default function App() {
+  return (
+    <AppProvider>
+      <HashRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="/calendar" element={<Calendar />} />
