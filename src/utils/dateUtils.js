@@ -51,3 +51,11 @@ export function isTaskOverdue(task) {
   if (task.status === 'Completed') return false;
   return task.dueDate < todayISO();
 }
+
+/** "Due today", "Due in 3 days", "3 days overdue", etc. */
+export function dueLabel(iso) {
+  const diff = daysUntil(iso);
+  if (diff === 0) return 'Due today';
+  if (diff === 1) return 'Due tomorrow';
+  if (diff > 1) return `Due in ${diff} days`;
+  if (diff === -1) return '1 day overdue';
