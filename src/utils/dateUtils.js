@@ -111,3 +111,8 @@ export function monthMatrix(year, month, weekStartsOn = 0) {
   }
   return weeks;
 }
+
+/** Month name helper. */
+export function monthLabel(year, month) {
+  return new Date(year, month, 1).toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+}
