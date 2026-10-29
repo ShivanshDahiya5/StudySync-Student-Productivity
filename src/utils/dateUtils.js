@@ -100,3 +100,14 @@ export function monthMatrix(year, month, weekStartsOn = 0) {
   const start = new Date(year, month, 1 - offset);
   const weeks = [];
   let current = new Date(start);
+  for (let w = 0; w < 6; w += 1) {
+    const week = [];
+    for (let d = 0; d < 7; d += 1) {
+      week.push(new Date(current));
+      current.setDate(current.getDate() + 1);
+    }
+    weeks.push(week);
+    if (current.getMonth() !== month && w >= 4) break;
+  }
+  return weeks;
+}
