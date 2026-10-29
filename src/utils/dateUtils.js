@@ -44,3 +44,10 @@ export function daysUntil(iso, from = new Date()) {
   const start = new Date(from.getFullYear(), from.getMonth(), from.getDate());
   return Math.round((target - start) / 86400000);
 }
+
+/** A task is overdue only when due date < today AND it is not completed. */
+export function isTaskOverdue(task) {
+  if (!task || !task.dueDate) return false;
+  if (task.status === 'Completed') return false;
+  return task.dueDate < todayISO();
+}
