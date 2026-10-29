@@ -37,3 +37,10 @@ export function formatTimestamp(isoString) {
     return '—';
   }
 }
+
+/** Whole days from today until the given ISO date (negative = past). */
+export function daysUntil(iso, from = new Date()) {
+  const target = parseISO(iso);
+  const start = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+  return Math.round((target - start) / 86400000);
+}
