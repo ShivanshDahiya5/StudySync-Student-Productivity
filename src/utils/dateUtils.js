@@ -67,3 +67,12 @@ export function weekdayNames(weekStartsOn = 0) {
   const base = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   return weekStartsOn === 1 ? [...base.slice(1), base[0]] : base;
 }
+
+/** Date of the first day of the week containing `date`. */
+export function startOfWeek(date, weekStartsOn = 0) {
+  const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const day = d.getDay();
+  const diff = weekStartsOn === 1 ? (day + 6) % 7 : day;
+  d.setDate(d.getDate() - diff);
+  return d;
+}
