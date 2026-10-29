@@ -59,3 +59,11 @@ export function dueLabel(iso) {
   if (diff === 1) return 'Due tomorrow';
   if (diff > 1) return `Due in ${diff} days`;
   if (diff === -1) return '1 day overdue';
+  return `${Math.abs(diff)} days overdue`;
+}
+
+/** Short weekday names, optionally starting on Monday. */
+export function weekdayNames(weekStartsOn = 0) {
+  const base = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  return weekStartsOn === 1 ? [...base.slice(1), base[0]] : base;
+}
