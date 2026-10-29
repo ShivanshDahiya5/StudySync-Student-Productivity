@@ -84,3 +84,11 @@ export function lastNDays(count) {
   for (let i = count - 1; i >= 0; i -= 1) {
     const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
     out.push({
+      iso: toISODate(d),
+      date: d,
+      label: d.toLocaleDateString(undefined, { weekday: 'short' }),
+      dayNum: d.getDate(),
+    });
+  }
+  return out;
+}
