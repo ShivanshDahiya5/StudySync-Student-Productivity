@@ -76,3 +76,11 @@ export function startOfWeek(date, weekStartsOn = 0) {
   d.setDate(d.getDate() - diff);
   return d;
 }
+
+/** Array of the last `count` days (oldest first) as { iso, date, label }. */
+export function lastNDays(count) {
+  const out = [];
+  const now = new Date();
+  for (let i = count - 1; i >= 0; i -= 1) {
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
+    out.push({
