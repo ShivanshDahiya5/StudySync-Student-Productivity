@@ -92,3 +92,11 @@ export function lastNDays(count) {
   }
   return out;
 }
+
+/** Month matrix (weeks of 7 days) for a calendar grid. */
+export function monthMatrix(year, month, weekStartsOn = 0) {
+  const first = new Date(year, month, 1);
+  const offset = weekStartsOn === 1 ? (first.getDay() + 6) % 7 : first.getDay();
+  const start = new Date(year, month, 1 - offset);
+  const weeks = [];
+  let current = new Date(start);
