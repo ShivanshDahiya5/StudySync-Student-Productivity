@@ -33,3 +33,12 @@ export function validateBackup(raw) {
   }
   const data = raw.data && typeof raw.data === 'object' ? raw.data : raw;
   const tasks = data.tasks;
+  const subjects = data.subjects;
+
+  if (!Array.isArray(tasks) || !Array.isArray(subjects)) {
+    return { valid: false, error: 'Backup is missing the tasks or subjects list.' };
+  }
+
+  const hex = /^#[0-9a-fA-F]{6}$/;
+  const cleanSubjects = subjects
+    .filter((s) => s && typeof s === 'object' && typeof s.name === 'string' && s.name.
