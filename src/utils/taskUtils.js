@@ -52,3 +52,13 @@ export function filterAndSortTasks(tasks, filters = {}, sort = 'dueDate') {
 
   return result;
 }
+
+/** Core statistics used by the dashboard and analytics page. */
+export function computeStats(tasks) {
+  const total = tasks.length;
+  const completed = tasks.filter((t) => t.status === 'Completed').length;
+  const overdue = tasks.filter(isTaskOverdue).length;
+  const pending = total - completed;
+  const completionRate = total === 0 ? 0 : Math.round((completed / total) * 100);
+  return { total, completed, pending, overdue, completionRate };
+}
