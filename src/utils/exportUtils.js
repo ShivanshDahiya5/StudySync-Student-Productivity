@@ -41,4 +41,13 @@ export function validateBackup(raw) {
 
   const hex = /^#[0-9a-fA-F]{6}$/;
   const cleanSubjects = subjects
-    .filter((s) => s && typeof s === 'object' && typeof s.name === 'string' && s.name.
+    .filter((s) => s && typeof s === 'object' && typeof s.name === 'string' && s.name.trim())
+    .map((s) => ({
+      id: String(s.id || ''),
+      name: String(s.name).trim().slice(0, 60),
+      color: hex.test(s.color) ? s.color : '#6366f1',
+      createdAt: typeof s.createdAt === 'string' ? s.createdAt : new Date().toISOString(),
+    }));
+  const subjectIds = new Set(cleanSubjects.map((s) => s.id));
+
+  const isoDate = /^\d{4}-\d{2}-\d{2}$/;
