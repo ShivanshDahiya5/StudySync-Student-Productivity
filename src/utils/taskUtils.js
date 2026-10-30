@@ -96,3 +96,15 @@ export function weeklyCompletionTrend(tasks) {
     created: tasks.filter((t) => t.createdAt && t.createdAt.slice(0, 10) === day.iso).length,
   }));
 }
+
+/** Per-subject totals: { subjectId: { total, completed, pending } }. */
+export function subjectStats(tasks) {
+  const map = {};
+  tasks.forEach((t) => {
+    if (!map[t.subjectId]) map[t.subjectId] = { total: 0, completed: 0, pending: 0 };
+    map[t.subjectId].total += 1;
+    if (t.status === 'Completed') map[t.subjectId].completed += 1;
+    else map[t.subjectId].pending += 1;
+  });
+  return map;
+}
