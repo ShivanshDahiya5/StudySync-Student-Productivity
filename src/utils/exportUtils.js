@@ -26,3 +26,10 @@ export function downloadJSON(obj, filename) {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
+export function validateBackup(raw) {
+  if (!raw || typeof raw !== 'object') {
+    return { valid: false, error: 'The file does not contain a valid StudySync backup.' };
+  }
+  const data = raw.data && typeof raw.data === 'object' ? raw.data : raw;
+  const tasks = data.tasks;
