@@ -21,7 +21,7 @@ export function filterAndSortTasks(tasks, filters = {}, sort = 'dueDate') {
   const q = search.trim().toLowerCase();
   const today = todayISO();
 
-    let result = tasks.filter((t) => {
+  let result = tasks.filter((t) => {
     if (q && !`${t.title} ${t.description || ''}`.toLowerCase().includes(q)) return false;
     if (subjectId !== 'all' && t.subjectId !== subjectId) return false;
     if (priority !== 'all' && t.priority !== priority) return false;
@@ -119,3 +119,15 @@ export function motivationalMessage(stats, dueTodayCount) {
   }
   if (stats.completionRate === 100) {
     return 'Incredible — every task is done. Enjoy your well-earned break!';
+  }
+  if (dueTodayCount === 0 && stats.pending > 0) {
+    return 'Nothing is due today. Get ahead by starting your next deadline early.';
+  }
+  if (stats.completionRate >= 75) {
+    return 'Fantastic progress! You are almost at the finish line.';
+  }
+  if (stats.completionRate >= 40) {
+    return 'Great momentum — keep knocking out those tasks one by one.';
+  }
+  return 'Every completed task is a win. Focus on one thing at a time and keep going!';
+}
