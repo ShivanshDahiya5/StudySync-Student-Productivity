@@ -108,3 +108,14 @@ export function subjectStats(tasks) {
   });
   return map;
 }
+
+/** Friendly motivational line based on today's productivity. */
+export function motivationalMessage(stats, dueTodayCount) {
+  if (stats.total === 0) {
+    return 'Start by adding your first task — small steps build big results.';
+  }
+  if (stats.overdue > 0) {
+    return `You have ${stats.overdue} overdue task${stats.overdue > 1 ? 's' : ''}. Tackle the oldest one first to get back on track!`;
+  }
+  if (stats.completionRate === 100) {
+    return 'Incredible — every task is done. Enjoy your well-earned break!';
