@@ -32,3 +32,23 @@ export function filterAndSortTasks(tasks, filters = {}, sort = 'dueDate') {
     if (due === 'week' && t.dueDate) {
       const diff = (new Date(t.dueDate) - new Date(today)) / 86400000;
       if (diff < 0 || diff > 7) return false;
+    }
+    return true;
+  });
+
+  result = [...result].sort((a, b) => {
+    switch (sort) {
+      case 'priority':
+        return PRIORITY_RANK[b.priority] - PRIORITY_RANK[a.priority] || a.dueDate.localeCompare(b.dueDate);
+      case 'createdAt':
+        return (b.createdAt || '').localeCompare(a.createdAt || '');
+      case 'title':
+        return a.title.localeCompare(b.title);
+      case 'dueDate':
+      default:
+        return (a.dueDate || '9999').localeCompare(b.dueDate || '9999');
+    }
+  });
+
+  return result;
+}
