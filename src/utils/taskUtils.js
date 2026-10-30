@@ -73,3 +73,15 @@ export function tasksDueToday(tasks) {
 export function upcomingDeadlines(tasks, limit = 5) {
   const today = todayISO();
   return tasks
+    .filter((t) => t.status !== 'Completed' && t.dueDate >= today)
+    .sort((a, b) => a.dueDate.localeCompare(b.dueDate))
+    .slice(0, limit);
+}
+
+/** Most recently completed tasks (by completedAt). */
+export function recentlyCompleted(tasks, limit = 5) {
+  return tasks
+    .filter((t) => t.status === 'Completed')
+    .sort((a, b) => (b.completedAt || '').localeCompare(a.completedAt || ''))
+    .slice(0, limit);
+}
