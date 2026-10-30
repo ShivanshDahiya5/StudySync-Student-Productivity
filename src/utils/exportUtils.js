@@ -51,3 +51,10 @@ export function validateBackup(raw) {
   const subjectIds = new Set(cleanSubjects.map((s) => s.id));
 
   const isoDate = /^\d{4}-\d{2}-\d{2}$/;
+    const cleanTasks = tasks
+    .filter((t) => t && typeof t === 'object' && typeof t.title === 'string' && t.title.trim())
+    .map((t) => ({
+      id: String(t.id || ''),
+      title: String(t.title).trim().slice(0, 200),
+      description: typeof t.description === 'string' ? t.description.slice(0, 2000) : '',
+      subjectId: subjectIds.has(String(t.subjectId)) ? String(t.subjectId) : cleanSubjects[0]?.id || '',
