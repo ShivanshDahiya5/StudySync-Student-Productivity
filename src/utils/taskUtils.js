@@ -62,3 +62,14 @@ export function computeStats(tasks) {
   const completionRate = total === 0 ? 0 : Math.round((completed / total) * 100);
   return { total, completed, pending, overdue, completionRate };
 }
+
+/** Tasks due today (not completed). */
+export function tasksDueToday(tasks) {
+  const today = todayISO();
+  return tasks.filter((t) => t.dueDate === today && t.status !== 'Completed');
+}
+
+/** Nearest upcoming deadlines (not completed, due date >= today). */
+export function upcomingDeadlines(tasks, limit = 5) {
+  const today = todayISO();
+  return tasks
