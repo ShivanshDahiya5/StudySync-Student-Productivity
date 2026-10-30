@@ -20,3 +20,15 @@ export function filterAndSortTasks(tasks, filters = {}, sort = 'dueDate') {
   const { search = '', subjectId = 'all', priority = 'all', status = 'all', due = 'all' } = filters;
   const q = search.trim().toLowerCase();
   const today = todayISO();
+
+    let result = tasks.filter((t) => {
+    if (q && !`${t.title} ${t.description || ''}`.toLowerCase().includes(q)) return false;
+    if (subjectId !== 'all' && t.subjectId !== subjectId) return false;
+    if (priority !== 'all' && t.priority !== priority) return false;
+    if (status !== 'all' && t.status !== status) return false;
+    if (due === 'today' && t.dueDate !== today) return false;
+    if (due === 'overdue' && !isTaskOverdue(t)) return false;
+    if (due === 'none' && t.dueDate) return false;
+    if (due === 'week' && t.dueDate) {
+      const diff = (new Date(t.dueDate) - new Date(today)) / 86400000;
+      if (diff < 0 || diff > 7) return false;
