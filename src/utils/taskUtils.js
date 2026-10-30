@@ -85,3 +85,14 @@ export function recentlyCompleted(tasks, limit = 5) {
     .sort((a, b) => (b.completedAt || '').localeCompare(a.completedAt || ''))
     .slice(0, limit);
 }
+
+/** Completion trend for the last 7 days. */
+export function weeklyCompletionTrend(tasks) {
+  return lastNDays(7).map((day) => ({
+    ...day,
+    completed: tasks.filter(
+      (t) => t.status === 'Completed' && t.completedAt && t.completedAt.slice(0, 10) === day.iso
+    ).length,
+    created: tasks.filter((t) => t.createdAt && t.createdAt.slice(0, 10) === day.iso).length,
+  }));
+}
