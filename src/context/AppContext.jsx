@@ -91,3 +91,14 @@ export function AppProvider({ children }) {
       return null;
     });
   }, []);
+
+  /* ---------------- Task actions ---------------- */
+  const addTask = useCallback(
+    (data) => {
+      const now = new Date().toISOString();
+      const task = {
+        id: uid(),
+        title: data.title.trim(),
+        description: (data.description || '').trim(),
+        subjectId: data.subjectId,
+        dueDate: data.dueDate,
