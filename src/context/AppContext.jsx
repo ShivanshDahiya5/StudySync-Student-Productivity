@@ -102,3 +102,14 @@ export function AppProvider({ children }) {
         description: (data.description || '').trim(),
         subjectId: data.subjectId,
         dueDate: data.dueDate,
+        priority: data.priority,
+        status: data.status,
+        createdAt: now,
+        completedAt: data.status === 'Completed' ? now : null,
+      };
+      setTasks((prev) => [task, ...prev]);
+      pushToast(`Task "${task.title}" created.`);
+      return task;
+    },
+    [setTasks, pushToast]
+  );
