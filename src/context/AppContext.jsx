@@ -72,3 +72,11 @@ export function AppProvider({ children }) {
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), 3500);
   }, []);
+  const dismissToast = useCallback((id) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
+
+  /* ---------------- Confirm dialog ---------------- */
+  const [confirmState, setConfirmState] = useState(null);
+  const confirmAction = useCallback(
+    ({ title, message, confirmLabel = 'Confirm', cancelLabel = 'Cancel', danger = true }) =>
