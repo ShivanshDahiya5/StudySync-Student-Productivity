@@ -64,3 +64,11 @@ export function AppProvider({ children }) {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', normalizedSettings.theme);
   }, [normalizedSettings.theme]);
+
+  /* ---------------- Toasts ---------------- */
+  const [toasts, setToasts] = useState([]);
+  const pushToast = useCallback((message, type = 'success') => {
+    const id = uid();
+    setToasts((prev) => [...prev, { id, message, type }]);
+    setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), 3500);
+  }, []);
