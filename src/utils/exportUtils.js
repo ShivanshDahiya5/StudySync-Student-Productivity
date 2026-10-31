@@ -64,3 +64,11 @@ export function validateBackup(raw) {
       createdAt: typeof t.createdAt === 'string' ? t.createdAt : new Date().toISOString(),
       completedAt: typeof t.completedAt === 'string' ? t.completedAt : null,
     }));
+
+  const settings =
+    data.settings && typeof data.settings === 'object' && !Array.isArray(data.settings)
+      ? data.settings
+      : null;
+
+  return { valid: true, data: { tasks: cleanTasks, subjects: cleanSubjects, settings } };
+}
