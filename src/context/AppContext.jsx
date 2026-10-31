@@ -32,3 +32,14 @@ const DEFAULT_SETTINGS = {
 function normalizeSettings(stored) {
   return {
     ...DEFAULT_SETTINGS,
+    ...(stored && typeof stored === 'object' ? stored : {}),
+    theme: stored?.theme === 'dark' ? 'dark' : 'light',
+    weekStartsOn: stored?.weekStartsOn === 1 ? 1 : 0,
+    notifications: typeof stored?.notifications === 'boolean' ? stored.notifications : true,
+  };
+}
+
+export function AppProvider({ children }) {
+  const [tasks, setTasks] = useLocalStorage(STORAGE_KEYS.tasks, []);
+  const [subjects, setSubjects] = useLocalStorage(STORAGE_KEYS.subjects, null);
+  const [settings, setSettings] = useLocalStorage(STORAGE_KEYS.settings, DEFAULT_SETTINGS);
