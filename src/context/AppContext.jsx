@@ -59,3 +59,8 @@ export function AppProvider({ children }) {
   }, [subjects]);
 
   const normalizedSettings = useMemo(() => normalizeSettings(settings), [settings]);
+
+  /* ---------------- Theme ---------------- */
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', normalizedSettings.theme);
+  }, [normalizedSettings.theme]);
