@@ -137,3 +137,18 @@ export function AppProvider({ children }) {
     },
     [setTasks, pushToast]
   );
+
+  const deleteTask = useCallback(
+    async (task) => {
+      const ok = await confirmAction({
+        title: 'Delete task',
+        message: `Are you sure you want to delete "${task.title}"? This cannot be undone.`,
+        confirmLabel: 'Delete',
+      });
+      if (!ok) return false;
+      setTasks((prev) => prev.filter((t) => t.id !== task.id));
+      pushToast('Task deleted.', 'info');
+      return true;
+    },
+    [confirmAction, setTasks, pushToast]
+  );
