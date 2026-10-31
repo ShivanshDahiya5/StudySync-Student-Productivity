@@ -53,3 +53,9 @@ export function AppProvider({ children }) {
       setSubjects(activeSubjects);
     }
   }, []);
+
+  useEffect(() => {
+    if (Array.isArray(subjects)) setActiveSubjects(subjects);
+  }, [subjects]);
+
+  const normalizedSettings = useMemo(() => normalizeSettings(settings), [settings]);
