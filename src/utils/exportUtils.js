@@ -58,3 +58,9 @@ export function validateBackup(raw) {
       title: String(t.title).trim().slice(0, 200),
       description: typeof t.description === 'string' ? t.description.slice(0, 2000) : '',
       subjectId: subjectIds.has(String(t.subjectId)) ? String(t.subjectId) : cleanSubjects[0]?.id || '',
+      dueDate: isoDate.test(String(t.dueDate)) ? String(t.dueDate) : new Date().toISOString().slice(0, 10),
+      priority: PRIORITIES.includes(t.priority) ? t.priority : 'Medium',
+      status: STATUSES.includes(t.status) ? t.status : 'Pending',
+      createdAt: typeof t.createdAt === 'string' ? t.createdAt : new Date().toISOString(),
+      completedAt: typeof t.completedAt === 'string' ? t.completedAt : null,
+    }));
