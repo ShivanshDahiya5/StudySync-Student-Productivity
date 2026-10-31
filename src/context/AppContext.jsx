@@ -43,3 +43,13 @@ export function AppProvider({ children }) {
   const [tasks, setTasks] = useLocalStorage(STORAGE_KEYS.tasks, []);
   const [subjects, setSubjects] = useLocalStorage(STORAGE_KEYS.subjects, null);
   const [settings, setSettings] = useLocalStorage(STORAGE_KEYS.settings, DEFAULT_SETTINGS);
+
+  // First launch: seed starter subjects once, then persist.
+  const [activeSubjects, setActiveSubjects] = useState(() =>
+    Array.isArray(subjects) ? subjects : subjects === null ? createStarterSubjects() : []
+  );
+  useEffect(() => {
+    if (!Array.isArray(subjects)) {
+      setSubjects(activeSubjects);
+    }
+  }, []);
