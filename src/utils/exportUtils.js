@@ -51,7 +51,7 @@ export function validateBackup(raw) {
   const subjectIds = new Set(cleanSubjects.map((s) => s.id));
 
   const isoDate = /^\d{4}-\d{2}-\d{2}$/;
-    const cleanTasks = tasks
+  const cleanTasks = tasks
     .filter((t) => t && typeof t === 'object' && typeof t.title === 'string' && t.title.trim())
     .map((t) => ({
       id: String(t.id || ''),
@@ -71,4 +71,20 @@ export function validateBackup(raw) {
       : null;
 
   return { valid: true, data: { tasks: cleanTasks, subjects: cleanSubjects, settings } };
+}
+
+/** Read a File object and resolve with its parsed JSON. */
+export function readFileAsJSON(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        resolve(JSON.parse(reader.result));
+      } catch {
+        reject(new Error('The selected file is not valid JSON.'));
+      }
+    };
+    reader.onerror = () => reject(new Error('Could not read the selected file.'));
+    reader.readAsText(file);
+  });
 }
