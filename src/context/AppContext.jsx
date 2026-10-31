@@ -20,3 +20,15 @@ function createStarterSubjects() {
     { id: uid(), name: 'Physics', color: DEFAULT_SUBJECT_COLORS[2], createdAt: now },
   ];
 }
+
+const DEFAULT_SETTINGS = {
+  theme: 'light',
+  displayName: 'Student',
+  weekStartsOn: 0,
+  notifications: true,
+};
+
+/** Merge stored settings with defaults so old saves never break the app. */
+function normalizeSettings(stored) {
+  return {
+    ...DEFAULT_SETTINGS,
