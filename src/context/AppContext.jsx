@@ -113,3 +113,27 @@ export function AppProvider({ children }) {
     },
     [setTasks, pushToast]
   );
+
+  const updateTask = useCallback(
+    (id, data) => {
+      setTasks((prev) =>
+        prev.map((t) => {
+          if (t.id !== id) return t;
+          const status = data.status;
+          return {
+            ...t,
+            title: data.title.trim(),
+            description: (data.description || '').trim(),
+            subjectId: data.subjectId,
+            dueDate: data.dueDate,
+            priority: data.priority,
+            status,
+            completedAt:
+              status === 'Completed' ? t.completedAt || new Date().toISOString() : null,
+          };
+        })
+      );
+      pushToast('Task updated.');
+    },
+    [setTasks, pushToast]
+  );
