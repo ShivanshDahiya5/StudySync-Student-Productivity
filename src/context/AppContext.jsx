@@ -152,3 +152,20 @@ export function AppProvider({ children }) {
     },
     [confirmAction, setTasks, pushToast]
   );
+
+  const toggleTaskStatus = useCallback(
+    (id) => {
+      setTasks((prev) =>
+        prev.map((t) => {
+          if (t.id !== id) return t;
+          const done = t.status !== 'Completed';
+          return {
+            ...t,
+            status: done ? 'Completed' : 'Pending',
+            completedAt: done ? new Date().toISOString() : null,
+          };
+        })
+      );
+    },
+    [setTasks]
+  );
