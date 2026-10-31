@@ -80,3 +80,14 @@ export function AppProvider({ children }) {
   const [confirmState, setConfirmState] = useState(null);
   const confirmAction = useCallback(
     ({ title, message, confirmLabel = 'Confirm', cancelLabel = 'Cancel', danger = true }) =>
+      new Promise((resolve) => {
+        setConfirmState({ title, message, confirmLabel, cancelLabel, danger, resolve });
+      }),
+    []
+  );
+  const handleConfirmResolve = useCallback((result) => {
+    setConfirmState((prev) => {
+      if (prev) prev.resolve(result);
+      return null;
+    });
+  }, []);
