@@ -308,3 +308,24 @@ export function AppProvider({ children }) {
       setReminderSignature(signature);
     }
   }, [tasks, normalizedSettings.notifications, reminderSignature, pushToast]);
+
+  /* ---------------- Derived helpers ---------------- */
+  const getSubject = useCallback(
+    (id) => activeSubjects.find((s) => s.id === id) || null,
+    [activeSubjects]
+  );
+
+  const value = {
+    tasks,
+    subjects: activeSubjects,
+    settings: normalizedSettings,
+    toasts,
+    confirmState,
+    pushToast,
+    dismissToast,
+    confirmAction,
+    resolveConfirm: handleConfirmResolve,
+    addTask,
+    updateTask,
+    deleteTask,
+    toggleTaskStatus,
