@@ -252,3 +252,39 @@ export function AppProvider({ children }) {
     },
     [setSettings]
   );
+
+  /* ---------------- Import / export / reset ---------------- */
+  const importBackup = useCallback(
+    (backup) => {
+      const result = validateBackup(backup);
+      if (!result.valid) {
+        pushToast(result.error, 'error');
+        return false;
+      }
+      const { tasks: t, subjects: s, settings: st } = result.data;
+      setTasks(t);
+      setActiveSubjects(s);
+      setSubjects(s);
+      if (st) setSettings(normalizeSettings(st));
+      pushToast(`Import complete — ${t.length} task(s) and ${s.length} subject(s) restored.`);
+      return true;
+    },
+    [setTasks, setSubjects, setSettings, pushToast]
+  );
+
+  const resetAllData = useCallback(async () => {
+    const ok = await confirmAction({
+      title: 'Reset all data',
+      message:
+        'This permanently deletes every task, subject and preference stored in this browser. This cannot be undone. Continue?',
+      confirmLabel: 'Reset everything',
+    });
+    if (!ok) return false;
+    setTasks([]);
+    const fresh = createStarterSubjects();
+    setActiveSubjects(fresh);
+    setSubjects(fresh);
+    setSettings(DEFAULT_SETTINGS);
+    pushToast('All data has been reset.', 'info');
+    return true;
+  }, [confirmAction, setTasks, setSubjects, setSettings, pushToast]);
