@@ -13,3 +13,22 @@ export function StatusBadge({ status, overdue }) {
   if (overdue) return <span className="badge badge-overdue">Overdue</span>;
   return <span className={`badge ${STATUS_CLASS[status] || 'badge-pending'}`}>{status}</span>;
 }
+
+function TaskActions({ task, onEdit }) {
+  const { deleteTask } = useApp();
+  return (
+    <div className="task-actions">
+      <button type="button" className="btn-icon" onClick={() => onEdit(task)} aria-label={`Edit task ${task.title}`}>
+        <Pencil size={16} />
+      </button>
+      <button
+        type="button"
+        className="btn-icon danger"
+        onClick={() => deleteTask(task)}
+        aria-label={`Delete task ${task.title}`}
+      >
+        <Trash2 size={16} />
+      </button>
+    </div>
+  );
+}
