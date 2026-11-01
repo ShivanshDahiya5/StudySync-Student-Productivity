@@ -56,3 +56,32 @@ export default function TaskCard({ task, view = 'list', onEdit }) {
           <div className={`priority-stripe ${task.priority}`} title={`${task.priority} priority`} />
           <TaskActions task={task} onEdit={onEdit} />
         </div>
+        <div>
+          <h3 className={`task-title${done ? ' done' : ''}`}>{task.title}</h3>
+          {task.description ? <p className="task-desc">{task.description}</p> : null}
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+          <PriorityBadge priority={task.priority} />
+          <StatusBadge status={task.status} overdue={overdue} />
+        </div>
+
+        <div className="task-meta" style={{ marginTop: 'auto' }}>
+          <SubjectTag subject={subject} />
+          <span className={`task-meta-item${overdue ? ' overdue' : ''}`}>
+            {formatDate(task.dueDate)} · {dueLabel(task.dueDate)}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          className={`btn btn-sm ${done ? 'btn-secondary' : 'btn-primary'}`}
+          onClick={() => toggleTaskStatus(task.id)}
+          style={{ width: '100%' }}
+        >
+          <Check size={14} />
+          {done ? 'Mark as Pending' : 'Mark as Completed'}
+        </button>
+      </div>
+    );
+  }
