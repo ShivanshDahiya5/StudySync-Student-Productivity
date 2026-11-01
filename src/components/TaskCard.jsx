@@ -85,3 +85,15 @@ export default function TaskCard({ task, view = 'list', onEdit }) {
       </div>
     );
   }
+
+  return (
+    <div className="task-row">
+      <button
+        type="button"
+        className={`task-check${done ? ' done' : ''}`}
+        onClick={() => toggleTaskStatus(task.id)}
+        aria-label={done ? `Mark ${task.title} as pending` : `Mark ${task.title} as completed`}
+        aria-pressed={done}
+      >
+        {done ? <Check size={13} /> : null}
+      </button>
