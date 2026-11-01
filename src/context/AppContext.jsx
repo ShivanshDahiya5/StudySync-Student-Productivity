@@ -228,7 +228,7 @@ export function AppProvider({ children }) {
         });
         return false;
       }
-            const ok = await confirmAction({
+      const ok = await confirmAction({
         title: 'Delete subject',
         message: `Delete the subject "${subject.name}"? This cannot be undone.`,
         confirmLabel: 'Delete',
