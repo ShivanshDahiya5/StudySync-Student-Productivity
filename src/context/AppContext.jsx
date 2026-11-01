@@ -204,3 +204,27 @@ export function AppProvider({ children }) {
         pushToast('A subject with that name already exists.', 'error');
         return false;
       }
+      setActiveSubjects((prev) => {
+        const next = prev.map((s) => (s.id === id ? { ...s, name: trimmed, color: color || s.color } : s));
+        setSubjects(next);
+        return next;
+      });
+      pushToast('Subject updated.');
+      return true;
+    },
+    [activeSubjects, setSubjects, pushToast]
+  );
+
+  const deleteSubject = useCallback(
+    async (subject) => {
+      const linked = tasks.filter((t) => t.subjectId === subject.id).length;
+      if (linked > 0) {
+        await confirmAction({
+          title: 'Subject has tasks',
+          message: `"${subject.name}" still has ${linked} task${linked > 1 ? 's' : ''}. Reassign or delete those tasks first, then delete the subject.`,
+          confirmLabel: 'Got it',
+          cancelLabel: 'Close',
+          danger: false,
+        });
+        return false;
+      }
