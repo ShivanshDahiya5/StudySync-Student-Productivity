@@ -186,3 +186,21 @@ export function AppProvider({ children }) {
           DEFAULT_SUBJECT_COLORS[activeSubjects.length % DEFAULT_SUBJECT_COLORS.length],
         createdAt: new Date().toISOString(),
       };
+      setActiveSubjects((prev) => {
+        const next = [...prev, subject];
+        setSubjects(next);
+        return next;
+      });
+      pushToast(`Subject "${trimmed}" added.`);
+      return subject;
+    },
+    [activeSubjects, setSubjects, pushToast]
+  );
+
+  const updateSubject = useCallback(
+    (id, name, color) => {
+      const trimmed = name.trim();
+      if (subjectsExists(activeSubjects, trimmed, id)) {
+        pushToast('A subject with that name already exists.', 'error');
+        return false;
+      }
