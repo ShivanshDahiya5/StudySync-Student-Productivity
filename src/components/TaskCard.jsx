@@ -32,3 +32,27 @@ function TaskActions({ task, onEdit }) {
     </div>
   );
 }
+
+function SubjectTag({ subject }) {
+  if (!subject) return null;
+  return (
+    <span className="subject-chip">
+      <span className="subject-dot" style={{ background: subject.color }} />
+      {subject.name}
+    </span>
+  );
+}
+
+export default function TaskCard({ task, view = 'list', onEdit }) {
+  const { toggleTaskStatus, getSubject } = useApp();
+  const subject = getSubject(task.subjectId);
+  const overdue = isTaskOverdue(task);
+  const done = task.status === 'Completed';
+
+  if (view === 'card') {
+    return (
+      <div className="card card-hover task-card">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
+          <div className={`priority-stripe ${task.priority}`} title={`${task.priority} priority`} />
+          <TaskActions task={task} onEdit={onEdit} />
+        </div>
