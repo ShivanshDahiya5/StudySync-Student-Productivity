@@ -329,3 +329,27 @@ export function AppProvider({ children }) {
     updateTask,
     deleteTask,
     toggleTaskStatus,
+    addSubject,
+    updateSubject,
+    deleteSubject,
+    updateSettings,
+    importBackup,
+    resetAllData,
+    getSubject,
+    subjectColors: DEFAULT_SUBJECT_COLORS,
+  };
+
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+}
+
+function subjectsExists(list, name, ignoreId) {
+  return list.some(
+    (s) => s.id !== ignoreId && s.name.toLowerCase() === name.toLowerCase()
+  );
+}
+
+export function useApp() {
+  const ctx = useContext(AppContext);
+  if (!ctx) throw new Error('useApp must be used inside <AppProvider>');
+  return ctx;
+}
