@@ -169,3 +169,20 @@ export function AppProvider({ children }) {
     },
     [setTasks]
   );
+
+  /* ---------------- Subject actions ---------------- */
+  const addSubject = useCallback(
+    (name, color) => {
+      const trimmed = name.trim();
+      if (subjectsExists(activeSubjects, trimmed)) {
+        pushToast('A subject with that name already exists.', 'error');
+        return null;
+      }
+      const subject = {
+        id: uid(),
+        name: trimmed,
+        color:
+          color ||
+          DEFAULT_SUBJECT_COLORS[activeSubjects.length % DEFAULT_SUBJECT_COLORS.length],
+        createdAt: new Date().toISOString(),
+      };
