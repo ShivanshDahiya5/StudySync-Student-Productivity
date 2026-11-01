@@ -288,3 +288,23 @@ export function AppProvider({ children }) {
     pushToast('All data has been reset.', 'info');
     return true;
   }, [confirmAction, setTasks, setSubjects, setSettings, pushToast]);
+
+  /* ---------------- In-app reminders (work while the app is open) ---------------- */
+  const [reminderSignature, setReminderSignature] = useState('');
+  useEffect(() => {
+    if (!normalizedSettings.notifications) return;
+    const stats = computeStats(tasks);
+    if (stats.total === 0) return;
+    const signature = `${todayISO()}:${stats.overdue}:${tasks.filter((t) => t.dueDate === todayISO() && t.status !== 'Completed').length}`;
+    if (signature !== reminderSignature) {
+      if (reminderSignature !== '') {
+        const dueToday = tasks.filter((t) => t.dueDate === todayISO() && t.status !== 'Completed').length;
+        if (stats.overdue > 0) {
+          pushToast(`Reminder: ${stats.overdue} overdue task${stats.overdue > 1 ? 's' : ''} waiting.`, 'error');
+        } else if (dueToday > 0) {
+          pushToast(`Reminder: ${dueToday} task${dueToday > 1 ? 's are' : ' is'} due today.`, 'info');
+        }
+      }
+      setReminderSignature(signature);
+    }
+  }, [tasks, normalizedSettings.notifications, reminderSignature, pushToast]);
