@@ -228,3 +228,27 @@ export function AppProvider({ children }) {
         });
         return false;
       }
+            const ok = await confirmAction({
+        title: 'Delete subject',
+        message: `Delete the subject "${subject.name}"? This cannot be undone.`,
+        confirmLabel: 'Delete',
+      });
+      if (!ok) return false;
+      setActiveSubjects((prev) => {
+        const next = prev.filter((s) => s.id !== subject.id);
+        setSubjects(next);
+        return next;
+      });
+      pushToast('Subject deleted.', 'info');
+      return true;
+    },
+    [tasks, confirmAction, setSubjects, pushToast]
+  );
+
+  /* ---------------- Settings ---------------- */
+  const updateSettings = useCallback(
+    (patch) => {
+      setSettings((prev) => ({ ...normalizeSettings(prev), ...patch }));
+    },
+    [setSettings]
+  );
