@@ -85,3 +85,22 @@ export default function Analytics() {
       </>
     );
   }
+
+  return (
+    <>
+      <div className="page-head">
+        <div>
+          <h1>Analytics</h1>
+          <p>Understand your study patterns — every number below is computed from your saved tasks.</p>
+        </div>
+        <button type="button" className="btn btn-secondary" onClick={() => navigate('/tasks')}>
+          <Plus size={16} /> Manage Tasks
+        </button>
+      </div>
+
+      <div className="analytics-grid">
+        <StatCard label="Total created" value={stats.total} icon={ListChecks} tone="indigo" />
+        <StatCard label="Completed" value={stats.completed} icon={CheckCircle2} tone="green" />
+        <StatCard label="Still pending" value={stats.pending} icon={Clock} tone="amber" />
+        <StatCard label="Overdue" value={stats.overdue} icon={AlertTriangle} tone="red" />
+      </div>
