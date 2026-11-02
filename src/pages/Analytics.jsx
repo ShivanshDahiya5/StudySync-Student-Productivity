@@ -37,3 +37,24 @@ export default function Analytics() {
 
   const createdThisWeek = trend.reduce((sum, d) => sum + d.created, 0);
   const completedThisWeek = trend.reduce((sum, d) => sum + d.completed, 0);
+
+  const statusData = ['Completed', 'Pending', 'In Progress']
+    .map((s) => ({
+      name: s,
+      value: tasks.filter((t) => t.status === s).length,
+      color: STATUS_COLORS[s],
+    }))
+    .filter((d) => d.value > 0);
+
+  const priorityData = ['High', 'Medium', 'Low']
+    .map((p) => ({ name: p, value: tasks.filter((t) => t.priority === p).length }))
+    .filter((d) => d.value > 0);
+
+  const subjectData = subjects
+    .map((s) => ({
+      name: s.name.length > 12 ? `${s.name.slice(0, 11)}…` : s.name,
+      Tasks: perSubject[s.id]?.total || 0,
+      color: s.color,
+    }))
+    .filter((d) => d.Tasks > 0)
+    .sort((a, b) => b.Tasks - a.Tasks);
