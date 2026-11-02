@@ -126,3 +126,27 @@ export default function Analytics() {
             </LineChart>
           </ResponsiveContainer>
         </ChartCard>
+
+        <ChartCard title="Subject-wise distribution" subtitle="Total tasks per subject">
+          {subjectData.length === 0 ? (
+            <EmptyState
+              icon={BarChart3}
+              title="No subject data"
+              text="Tasks assigned to subjects will appear here."
+            />
+          ) : (
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={subjectData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                <XAxis dataKey="name" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} allowDecimals={false} width={30} />
+                <Tooltip cursor={{ fill: 'var(--surface-2)' }} />
+                <Bar dataKey="Tasks" radius={[6, 6, 0, 0]}>
+                  {subjectData.map((d) => (
+                    <Cell key={d.name} fill={d.color} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          )}
+        </ChartCard>
