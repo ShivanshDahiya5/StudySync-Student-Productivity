@@ -20,3 +20,20 @@ import {
   PRIORITY_RANK,
 } from '../utils/taskUtils';
 import { isTaskOverdue, formatDate } from '../utils/dateUtils';
+
+const STATUS_COLORS = {
+  Completed: 'var(--success)',
+  Pending: 'var(--warning)',
+  'In Progress': 'var(--info)',
+};
+
+export default function Analytics() {
+  const { tasks, subjects, getSubject } = useApp();
+  const navigate = useNavigate();
+
+  const stats = useMemo(() => computeStats(tasks), [tasks]);
+  const trend = useMemo(() => weeklyCompletionTrend(tasks), [tasks]);
+  const perSubject = useMemo(() => subjectStats(tasks), [tasks]);
+
+  const createdThisWeek = trend.reduce((sum, d) => sum + d.created, 0);
+  const completedThisWeek = trend.reduce((sum, d) => sum + d.completed, 0);
