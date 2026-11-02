@@ -58,3 +58,30 @@ export default function Analytics() {
     }))
     .filter((d) => d.Tasks > 0)
     .sort((a, b) => b.Tasks - a.Tasks);
+
+  const bestDay = [...trend].sort((a, b) => b.completed - a.completed)[0];
+  const hardestSubject = [...subjectData][0];
+  const overdueTasks = tasks.filter(isTaskOverdue);
+  const avgPerDay = createdThisWeek > 0 ? (createdThisWeek / 7).toFixed(1) : '0';
+
+  if (tasks.length === 0) {
+    return (
+      <>
+        <div className="page-head">
+          <div>
+            <h1>Analytics</h1>
+            <p>Understand your study patterns with real data.</p>
+          </div>
+        </div>
+        <div className="card">
+          <EmptyState
+            icon={BarChart3}
+            title="No data to analyze yet"
+            text="Analytics are computed from your actual tasks. Create a few tasks and complete them — charts and insights will appear here automatically."
+            actionLabel="Go to My Tasks"
+            onAction={() => navigate('/tasks')}
+          />
+        </div>
+      </>
+    );
+  }
