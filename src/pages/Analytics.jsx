@@ -104,3 +104,25 @@ export default function Analytics() {
         <StatCard label="Still pending" value={stats.pending} icon={Clock} tone="amber" />
         <StatCard label="Overdue" value={stats.overdue} icon={AlertTriangle} tone="red" />
       </div>
+
+            <div className="analytics-grid" style={{ marginTop: 16 }}>
+        <StatCard label="Completion rate" value={`${stats.completionRate}%`} icon={Percent} tone="sky" />
+        <StatCard label="Created this week" value={createdThisWeek} icon={TrendingUp} tone="indigo" />
+        <StatCard label="Completed this week" value={completedThisWeek} icon={Target} tone="green" />
+        <StatCard label="Avg. tasks / day" value={avgPerDay} icon={BarChart3} tone="sky" />
+      </div>
+
+      <div className="chart-grid" style={{ marginTop: 20 }}>
+        <ChartCard title="Weekly completion trend" subtitle="Tasks completed each day over the last 7 days">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={trend.map((d) => ({ name: d.label, Completed: d.completed, Created: d.created }))}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+              <XAxis dataKey="name" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} allowDecimals={false} width={30} />
+              <Tooltip />
+              <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 12.5 }} />
+              <Line type="monotone" dataKey="Completed" stroke="var(--success)" strokeWidth={2.5} dot={{ r: 4 }} />
+              <Line type="monotone" dataKey="Created" stroke="var(--primary)" strokeWidth={2.5} dot={{ r: 4 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </ChartCard>
