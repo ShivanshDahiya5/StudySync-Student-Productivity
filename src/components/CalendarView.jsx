@@ -74,3 +74,47 @@ export default function CalendarView() {
               >
                 <ChevronLeft size={18} />
               </button>
+              <span className="calendar-month-label">{monthLabel(year, month)}</span>
+              <button
+                type="button"
+                className="btn-icon"
+                onClick={() => shiftMonth(1)}
+                aria-label="Next month"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+            <span style={{ width: 68 }} aria-hidden="true" />
+          </div>
+
+          <div className="calendar-weekdays" role="row">
+            {days.map((d) => (
+              <span key={d} role="columnheader">
+                {d}
+              </span>
+            ))}
+          </div>
+
+          <div className="calendar-grid">
+            {weeks.flat().map((date) => {
+              const iso = toISODate(date);
+              const dayTasks = tasksByDate[iso] || [];
+              const inMonth = date.getMonth() === month;
+              const cls = [
+                'calendar-day',
+                inMonth ? '' : 'other-month',
+                iso === today ? 'today' : '',
+                iso === selectedDate ? 'selected' : '',
+              ]
+                .filter(Boolean)
+                .join(' ');
+
+              return (
+                <button
+                  type="button"
+                  key={iso}
+                  className={cls}
+                  onClick={() => setSelectedDate(iso)}
+                  aria-label={`${iso}, ${dayTasks.length} task(s)`}
+                  aria-pressed={iso === selectedDate}
+                >
