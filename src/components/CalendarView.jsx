@@ -235,3 +235,39 @@ export default function CalendarView() {
             </div>
           ) : null}
 
+          <div className="card">
+            <div className="card-header">
+              <h3 className="card-title">Upcoming deadlines</h3>
+            </div>
+            <div className="card-body" style={{ paddingTop: 10 }}>
+              {upcoming.length === 0 ? (
+                <p style={{ color: 'var(--text-muted)', fontSize: 13.5 }}>
+                  Nothing upcoming — enjoy the free time or plan something new.
+                </p>
+              ) : (
+                upcoming.map((t) => {
+                  const subject = getSubject(t.subjectId);
+                  return (
+                    <div key={t.id} className="day-task-item">
+                      <span
+                        className="subject-dot"
+                        style={{ background: subject?.color || 'var(--primary)', marginTop: 7 }}
+                      />
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div className="task-title" style={{ fontSize: 13.5 }}>
+                          {t.title}
+                        </div>
+                        <div className="task-meta" style={{ marginTop: 4 }}>
+                          <span className="task-meta-item">{formatTimestamp(t.dueDate)}</span>
+                          <PriorityBadge priority={t.priority} />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
