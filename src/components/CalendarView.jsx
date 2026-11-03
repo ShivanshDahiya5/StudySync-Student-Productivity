@@ -118,3 +118,41 @@ export default function CalendarView() {
                   aria-label={`${iso}, ${dayTasks.length} task(s)`}
                   aria-pressed={iso === selectedDate}
                 >
+                  <span className="calendar-day-number">{date.getDate()}</span>
+                  <span className="calendar-dots">
+                    {dayTasks.slice(0, 4).map((t) => (
+                      <span
+                        key={t.id}
+                        className="calendar-dot"
+                        style={{
+                          background:
+                            t.status === 'Completed'
+                              ? 'var(--success)'
+                              : getSubject(t.subjectId)?.color || 'var(--primary)',
+                        }}
+                      />
+                    ))}
+                    {dayTasks.length > 4 ? <span className="calendar-dot-more">+{dayTasks.length - 4}</span> : null}
+                  </span>
+                  {dayTasks.some((t) => isTaskOverdue(t)) ? (
+                    <span className="calendar-day-count">Overdue</span>
+                  ) : null}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div className="card">
+            <div className="card-header">
+              <div>
+                <h3 className="card-title">
+                  <CalendarDays size={16} aria-hidden="true" />
+                  {selectedDate === today ? 'Today' : formatTimestamp(selectedDate)}
+                </h3>
+                <p className="card-subtitle">
+                  {selectedTasks.length} task{selectedTasks.length === 1 ? '' : 's'} scheduled
+                </p>
+              </div>
+            </div>
