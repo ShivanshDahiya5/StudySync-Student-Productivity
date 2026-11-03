@@ -200,3 +200,38 @@ export default function CalendarView() {
               )}
             </div>
           </div>
+          {overdueTasks.length > 0 ? (
+            <div className="card" style={{ borderColor: 'color-mix(in srgb, var(--danger) 40%, var(--border))' }}>
+              <div className="card-header">
+                <h3 className="card-title" style={{ color: 'var(--danger)' }}>
+                  <AlertTriangle size={16} aria-hidden="true" />
+                  Overdue ({overdueTasks.length})
+                </h3>
+              </div>
+              <div className="card-body" style={{ paddingTop: 10 }}>
+                {overdueTasks
+                  .sort((a, b) => a.dueDate.localeCompare(b.dueDate))
+                  .map((t) => (
+                    <div key={t.id} className="day-task-item">
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div className="task-title" style={{ fontSize: 13.5 }}>
+                          {t.title}
+                        </div>
+                        <div className="task-meta" style={{ marginTop: 4 }}>
+                          <span className="task-meta-item overdue">{formatTimestamp(t.dueDate)}</span>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        className="btn-icon"
+                        onClick={() => toggleTaskStatus(t.id)}
+                        aria-label={`Mark ${t.title} as completed`}
+                      >
+                        <Check size={16} />
+                      </button>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          ) : null}
+
