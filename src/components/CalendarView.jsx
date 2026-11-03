@@ -156,3 +156,47 @@ export default function CalendarView() {
                 </p>
               </div>
             </div>
+            <div className="card-body">
+              {selectedTasks.length === 0 ? (
+                <p style={{ color: 'var(--text-muted)', fontSize: 13.5 }}>
+                  No tasks are due on this date. Pick another day or add a task with this due date.
+                </p>
+              ) : (
+                <div>
+                  {selectedTasks.map((t) => {
+                    const subject = getSubject(t.subjectId);
+                    const overdue = isTaskOverdue(t);
+                    return (
+                      <div key={t.id} className="day-task-item">
+                        <button
+                          type="button"
+                          className={`task-check${t.status === 'Completed' ? ' done' : ''}`}
+                          style={{ marginTop: 2 }}
+                          onClick={() => toggleTaskStatus(t.id)}
+                          aria-label={`Toggle completion of ${t.title}`}
+                        />
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div
+                            className={`task-title${t.status === 'Completed' ? ' done' : ''}`}
+                            style={{ fontSize: 13.5 }}
+                          >
+                            {t.title}
+                          </div>
+                          <div className="task-meta" style={{ marginTop: 5, gap: 7 }}>
+                            {subject ? (
+                              <span className="subject-chip">
+                                <span className="subject-dot" style={{ background: subject.color }} />
+                                {subject.name}
+                              </span>
+                            ) : null}
+                            <PriorityBadge priority={t.priority} />
+                            <StatusBadge status={t.status} overdue={overdue} />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
