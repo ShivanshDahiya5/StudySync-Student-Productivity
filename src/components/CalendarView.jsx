@@ -31,3 +31,20 @@ export default function CalendarView() {
     if (!tasksByDate[t.dueDate]) tasksByDate[t.dueDate] = [];
     tasksByDate[t.dueDate].push(t);
   });
+
+  const shiftMonth = (delta) => {
+    const d = new Date(year, month + delta, 1);
+    setYear(d.getFullYear());
+    setMonth(d.getMonth());
+  };
+
+  const selectedTasks = (tasksByDate[selectedDate] || []).sort((a, b) =>
+    a.status === 'Completed' ? 1 : b.status === 'Completed' ? -1 : 0
+  );
+
+  const upcoming = tasks
+    .filter((t) => t.status !== 'Completed' && t.dueDate >= today)
+    .sort((a, b) => a.dueDate.localeCompare(b.dueDate))
+    .slice(0, 6);
+
+  const overdueTasks = tasks.filter(isTaskOverdue);
