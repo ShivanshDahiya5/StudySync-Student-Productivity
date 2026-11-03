@@ -171,3 +171,32 @@ export default function Analytics() {
             </PieChart>
           </ResponsiveContainer>
         </ChartCard>
+
+        <ChartCard title="Priority mix" subtitle="How your workload is distributed">
+          {priorityData.length === 0 ? (
+            <EmptyState icon={BarChart3} title="No data" text="Add tasks to see their priority distribution." />
+          ) : (
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={priorityData} layout="vertical" barSize={18}>
+                <XAxis type="number" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} width={70} />
+                <Tooltip cursor={{ fill: 'var(--surface-2)' }} />
+                <Bar dataKey="value" radius={[0, 6, 6, 0]}>
+                  {priorityData.map((d) => (
+                    <Cell
+                      key={d.name}
+                      fill={
+                        d.name === 'High'
+                          ? 'var(--danger)'
+                          : d.name === 'Medium'
+                            ? 'var(--warning)'
+                            : 'var(--info)'
+                      }
+                    />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          )}
+        </ChartCard>
+      </div>
