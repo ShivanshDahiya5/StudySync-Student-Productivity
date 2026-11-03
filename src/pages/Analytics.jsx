@@ -105,7 +105,7 @@ export default function Analytics() {
         <StatCard label="Overdue" value={stats.overdue} icon={AlertTriangle} tone="red" />
       </div>
 
-            <div className="analytics-grid" style={{ marginTop: 16 }}>
+      <div className="analytics-grid" style={{ marginTop: 16 }}>
         <StatCard label="Completion rate" value={`${stats.completionRate}%`} icon={Percent} tone="sky" />
         <StatCard label="Created this week" value={createdThisWeek} icon={TrendingUp} tone="indigo" />
         <StatCard label="Completed this week" value={completedThisWeek} icon={Target} tone="green" />
@@ -215,3 +215,34 @@ export default function Analytics() {
               <TrendingUp size={17} style={{ color: 'var(--success)', flexShrink: 0 }} />
             </div>
             <div className="insight-item">
+              <span>
+                {hardestSubject
+                  ? <>Your busiest subject is <strong>{hardestSubject.name}</strong> with {hardestSubject.Tasks} task(s).</>
+                  : 'Assign subjects to your tasks to unlock subject insights.'}
+              </span>
+              <Target size={17} style={{ color: 'var(--primary)', flexShrink: 0 }} />
+            </div>
+            <div className="insight-item">
+              <span>
+                {overdueTasks.length > 0 ? (
+                  <>
+                    You have <strong>{overdueTasks.length}</strong> overdue task
+                    {overdueTasks.length === 1 ? '' : 's'}. The oldest is{' '}
+                    <strong>{overdueTasks.sort((a, b) => PRIORITY_RANK[b.priority] - PRIORITY_RANK[a.priority])[0]?.title}</strong>{' '}
+                    (due {formatDate(overdueTasks[0]?.dueDate)}).
+                  </>
+                ) : (
+                  'No overdue work — you are fully up to date. Keep it up!'
+                )}
+              </span>
+              <AlertTriangle
+                size={17}
+                style={{ color: overdueTasks.length ? 'var(--danger)' : 'var(--success)', flexShrink: 0 }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
