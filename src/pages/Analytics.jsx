@@ -150,3 +150,24 @@ export default function Analytics() {
             </ResponsiveContainer>
           )}
         </ChartCard>
+
+        <ChartCard title="Status breakdown" subtitle="Completed vs. in progress vs. pending">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={statusData}
+                dataKey="value"
+                nameKey="name"
+                innerRadius={58}
+                outerRadius={95}
+                paddingAngle={3}
+              >
+                {statusData.map((d) => (
+                  <Cell key={d.name} fill={d.color} stroke="none" />
+                ))}
+              </Pie>
+              <Tooltip />
+              <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 12.5 }} />
+            </PieChart>
+          </ResponsiveContainer>
+        </ChartCard>
