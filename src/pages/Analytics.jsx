@@ -200,3 +200,18 @@ export default function Analytics() {
           )}
         </ChartCard>
       </div>
+
+      <div className="card" style={{ marginTop: 20 }}>
+        <div className="card-header">
+          <h3 className="card-title">Key insights</h3>
+        </div>
+        <div className="card-body">
+          <div className="insight-list">
+            <div className="insight-item">
+              <span>
+                Your most productive day this week was <strong>{bestDay?.label}</strong> with{' '}
+                <strong>{bestDay?.completed}</strong> task{bestDay?.completed === 1 ? '' : 's'} completed.
+              </span>
+              <TrendingUp size={17} style={{ color: 'var(--success)', flexShrink: 0 }} />
+            </div>
+            <div className="insight-item">
