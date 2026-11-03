@@ -48,3 +48,29 @@ export default function CalendarView() {
     .slice(0, 6);
 
   const overdueTasks = tasks.filter(isTaskOverdue);
+
+  return (
+    <>
+      <div className="calendar-layout">
+        <div className="card">
+          <div className="calendar-toolbar">
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              onClick={() => {
+                setYear(now.getFullYear());
+                setMonth(now.getMonth());
+                setSelectedDate(today);
+              }}
+            >
+              Today
+            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <button
+                type="button"
+                className="btn-icon"
+                onClick={() => shiftMonth(-1)}
+                aria-label="Previous month"
+              >
+                <ChevronLeft size={18} />
+              </button>
