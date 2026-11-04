@@ -52,3 +52,20 @@ export default function Header({ onMenuClick }) {
       >
         <Menu size={20} />
       </button>
+
+      <div className="header-title-block">
+        <h1 className="header-title">{title}</h1>
+        <div className="header-date">{today}</div>
+      </div>
+
+      <form className="header-search" onSubmit={submitSearch} role="search">
+        <Search size={16} aria-hidden="true" />
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search tasks…"
+          aria-label="Search tasks"
+        />
+      </form>
+
