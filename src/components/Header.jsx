@@ -32,3 +32,23 @@ export default function Header({ onMenuClick }) {
     .slice(0, 2)
     .join('')
     .toUpperCase();
+
+  const submitSearch = (e) => {
+    e.preventDefault();
+    navigate(`/tasks?q=${encodeURIComponent(query.trim())}`);
+  };
+
+  const toggleTheme = () => {
+    updateSettings({ theme: settings.theme === 'dark' ? 'light' : 'dark' });
+  };
+
+  return (
+    <header className="header">
+      <button
+        type="button"
+        className="btn-icon mobile-toggle"
+        onClick={onMenuClick}
+        aria-label="Open navigation menu"
+      >
+        <Menu size={20} />
+      </button>
