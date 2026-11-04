@@ -11,3 +11,24 @@ const TITLES = {
   '/analytics': 'Analytics',
   '/settings': 'Settings',
 };
+
+export default function Header({ onMenuClick }) {
+  const { settings, updateSettings } = useApp();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [query, setQuery] = useState('');
+
+  const title = TITLES[location.pathname] || 'StudySync';
+  const today = new Date().toLocaleDateString(undefined, {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
+  const initials = (settings.displayName || 'Student')
+    .split(/\s+/)
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
