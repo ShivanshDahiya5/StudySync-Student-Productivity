@@ -15,3 +15,30 @@ const SORT_OPTIONS = [
   { value: 'createdAt', label: 'Sort: Newest' },
   { value: 'title', label: 'Sort: Title' },
 ];
+
+export default function TaskFilters({ filters, sort, onFiltersChange, onSortChange }) {
+  const { subjects } = useApp();
+
+  const update = (patch) => onFiltersChange({ ...filters, ...patch });
+
+  const isFiltered =
+    filters.search !== '' ||
+    filters.subjectId !== 'all' ||
+    filters.priority !== 'all' ||
+    filters.status !== 'all' ||
+    filters.due !== 'all';
+
+  return (
+    <div className="toolbar">
+      <div className="grow" style={{ position: 'relative' }}>
+        <Search
+          size={16}
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            left: 12,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            color: 'var(--text-faint)',
+          }}
+        />
