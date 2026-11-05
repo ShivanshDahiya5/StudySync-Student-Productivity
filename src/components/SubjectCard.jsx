@@ -6,3 +6,14 @@ export default function SubjectCard({ subject, stats = { total: 0, completed: 0,
   return (
     <div className="card card-hover subject-card">
       <div className="subject-color-bar" style={{ background: subject.color }} />
+      <div className="subject-name-row">
+        <h3 style={{ fontSize: 15.5, fontWeight: 650, wordBreak: 'break-word' }}>{subject.name}</h3>
+        <div style={{ display: 'flex', gap: 2, flexShrink: 0 }}>
+          <button
+            type="button"
+            className="btn-icon"
+            onClick={() => onEdit(subject)}
+            aria-label={`Edit subject ${subject.name}`}
+          >
+            <Pencil size={15} />
+          </button>
