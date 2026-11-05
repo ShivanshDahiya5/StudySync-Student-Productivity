@@ -44,3 +44,16 @@ export default function Sidebar({ open, onClose, onNavigate }) {
             <div className="sidebar-brand-sub">Productivity Manager</div>
           </div>
         </div>
+
+        <nav className="sidebar-nav">
+          {SECTIONS.map((section) => (
+            <div key={section.label}>
+              <div className="nav-section-label">{section.label}</div>
+              {section.items.map(({ to, label, icon: Icon, end }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  end={end}
+                  className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+                  onClick={onNavigate}
+                >
