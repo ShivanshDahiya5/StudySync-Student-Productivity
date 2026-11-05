@@ -42,3 +42,43 @@ export default function TaskFilters({ filters, sort, onFiltersChange, onSortChan
             color: 'var(--text-faint)',
           }}
         />
+        <input
+          type="search"
+          className="form-input"
+          style={{ paddingLeft: 36 }}
+          value={filters.search}
+          onChange={(e) => update({ search: e.target.value })}
+          placeholder="Search by title or description…"
+          aria-label="Search tasks"
+        />
+      </div>
+
+      <select
+        className="form-select"
+        style={{ width: 'auto' }}
+        value={filters.subjectId}
+        onChange={(e) => update({ subjectId: e.target.value })}
+        aria-label="Filter by subject"
+      >
+        <option value="all">All subjects</option>
+        {subjects.map((s) => (
+          <option key={s.id} value={s.id}>
+            {s.name}
+          </option>
+        ))}
+      </select>
+
+      <select
+        className="form-select"
+        style={{ width: 'auto' }}
+        value={filters.priority}
+        onChange={(e) => update({ priority: e.target.value })}
+        aria-label="Filter by priority"
+      >
+        <option value="all">All priorities</option>
+        {PRIORITIES.map((p) => (
+          <option key={p} value={p}>
+            {p}
+          </option>
+        ))}
+      </select>
