@@ -16,3 +16,21 @@ export default function Modal({ open, onClose, title, children, footer, small = 
       document.body.style.overflow = '';
     };
   }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+      onClick={onClose}
+      ref={ref}
+    >
+      <div
+        className={`modal${small ? ' modal-sm' : ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-header">
+          <h2 className="modal-title">{title}</h2>
