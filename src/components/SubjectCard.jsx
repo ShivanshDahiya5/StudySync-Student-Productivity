@@ -17,3 +17,19 @@ export default function SubjectCard({ subject, stats = { total: 0, completed: 0,
           >
             <Pencil size={15} />
           </button>
+          <button
+            type="button"
+            className="btn-icon danger"
+            onClick={() => onDelete(subject)}
+            aria-label={`Delete subject ${subject.name}`}
+          >
+            <Trash2 size={15} />
+          </button>
+        </div>
+      </div>
+
+      <div className="subject-stats">
+        <div className="subject-stat">
+          <strong>{stats.total}</strong>
+          Total
+        </div>
