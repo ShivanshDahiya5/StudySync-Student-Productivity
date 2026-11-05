@@ -34,3 +34,18 @@ export default function Modal({ open, onClose, title, children, footer, small = 
       >
         <div className="modal-header">
           <h2 className="modal-title">{title}</h2>
+          <button
+            type="button"
+            className="btn-icon"
+            onClick={onClose}
+            aria-label="Close dialog"
+          >
+            <X size={18} />
+          </button>
+        </div>
+        <div className="modal-body">{children}</div>
+        {footer ? <div className="modal-footer">{footer}</div> : null}
+      </div>
+    </div>
+  );
+}
