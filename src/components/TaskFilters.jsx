@@ -82,7 +82,7 @@ export default function TaskFilters({ filters, sort, onFiltersChange, onSortChan
           </option>
         ))}
       </select>
-      
+
       <select
         className="form-select"
         style={{ width: 'auto' }}
@@ -125,3 +125,24 @@ export default function TaskFilters({ filters, sort, onFiltersChange, onSortChan
           </option>
         ))}
       </select>
+      
+      {isFiltered ? (
+        <button
+          type="button"
+          className="btn btn-ghost btn-sm"
+          onClick={() =>
+            onFiltersChange({
+              search: '',
+              subjectId: 'all',
+              priority: 'all',
+              status: 'all',
+              due: 'all',
+            })
+          }
+        >
+          <X size={14} /> Clear
+        </button>
+      ) : null}
+    </div>
+  );
+}
