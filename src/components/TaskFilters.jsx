@@ -82,3 +82,46 @@ export default function TaskFilters({ filters, sort, onFiltersChange, onSortChan
           </option>
         ))}
       </select>
+      
+      <select
+        className="form-select"
+        style={{ width: 'auto' }}
+        value={filters.status}
+        onChange={(e) => update({ status: e.target.value })}
+        aria-label="Filter by status"
+      >
+        <option value="all">All statuses</option>
+        {STATUSES.map((s) => (
+          <option key={s} value={s}>
+            {s}
+          </option>
+        ))}
+      </select>
+
+      <select
+        className="form-select"
+        style={{ width: 'auto' }}
+        value={filters.due}
+        onChange={(e) => update({ due: e.target.value })}
+        aria-label="Filter by due date"
+      >
+        {DUE_OPTIONS.map((d) => (
+          <option key={d.value} value={d.value}>
+            {d.label}
+          </option>
+        ))}
+      </select>
+
+      <select
+        className="form-select"
+        style={{ width: 'auto' }}
+        value={sort}
+        onChange={(e) => onSortChange(e.target.value)}
+        aria-label="Sort tasks"
+      >
+        {SORT_OPTIONS.map((s) => (
+          <option key={s.value} value={s.value}>
+            {s.label}
+          </option>
+        ))}
+      </select>
