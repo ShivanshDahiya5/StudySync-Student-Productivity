@@ -27,3 +27,20 @@ const SECTIONS = [
     ],
   },
 ];
+
+export default function Sidebar({ open, onClose, onNavigate }) {
+  return (
+    <>
+      {open ? (
+        <div className="sidebar-backdrop" onClick={onClose} aria-hidden="true" />
+      ) : null}
+      <aside className={`sidebar${open ? ' open' : ''}`} aria-label="Main navigation">
+        <div className="sidebar-brand">
+          <div className="sidebar-logo">
+            <GraduationCap size={21} />
+          </div>
+          <div>
+            <div className="sidebar-brand-text">StudySync</div>
+            <div className="sidebar-brand-sub">Productivity Manager</div>
+          </div>
+        </div>
