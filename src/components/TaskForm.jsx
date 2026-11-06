@@ -110,3 +110,24 @@ export default function TaskForm({ open, onClose, task, defaultSubjectId }) {
         </div>
       ) : null}
 
+      <form id="task-form" onSubmit={submit} noValidate>
+        <div className="field">
+          <label className="form-label" htmlFor="task-title">
+            Title<span className="req">*</span>
+          </label>
+          <input
+            id="task-title"
+            className={`form-input${errors.title ? ' error' : ''}`}
+            value={values.title}
+            onChange={set('title')}
+            onBlur={blur('title')}
+            placeholder="e.g. Complete DBMS assignment"
+            autoFocus
+            aria-invalid={Boolean(errors.title)}
+          />
+          {errors.title ? (
+            <div className="form-error">
+              <AlertCircle size={13} /> {errors.title}
+            </div>
+          ) : null}
+        </div>
