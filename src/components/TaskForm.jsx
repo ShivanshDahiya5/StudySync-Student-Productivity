@@ -35,3 +35,21 @@ export default function TaskForm({ open, onClose, task, defaultSubjectId }) {
   const [values, setValues] = useState(EMPTY);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    if (task) {
+      setValues({
+        title: task.title,
+        description: task.description || '',
+        subjectId: task.subjectId,
+        dueDate: task.dueDate,
+        priority: task.priority,
+        status: task.status,
+      });
+    } else {
+      setValues({ ...EMPTY, subjectId: defaultSubjectId || subjects[0]?.id || '', dueDate: todayISO() });
+    }
+    setErrors({});
+    setTouched(false);
+  }, [open, task, defaultSubjectId, subjects]);
