@@ -53,3 +53,22 @@ export default function TaskForm({ open, onClose, task, defaultSubjectId }) {
     setErrors({});
     setTouched(false);
   }, [open, task, defaultSubjectId, subjects]);
+
+  const set = (field) => (e) => {
+    const next = { ...values, [field]: e.target.value };
+    setValues(next);
+    if (touched) setErrors(validate(next, subjects));
+  };
+
+  const blur = (field) => () => {
+    setTouched(true);
+    setErrors(validate(values, subjects));
+    void field;
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    const found = validate(values, subjects);
+    setErrors(found);
+    setTouched(true);
+    if (Object.keys(found).length > 0) return;
