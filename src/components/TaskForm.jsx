@@ -13,3 +13,25 @@ const EMPTY = {
   priority: 'Medium',
   status: 'Pending',
 };
+
+function validate(values, subjects) {
+  const errors = {};
+  if (!values.title.trim()) errors.title = 'Title is required.';
+  else if (values.title.trim().length > 200) errors.title = 'Title must be under 200 characters.';
+  if (!values.subjectId) {
+    errors.subjectId = subjects.length === 0
+      ? 'Create a subject first on the Subjects page.'
+      : 'Please choose a subject.';
+  }
+  if (!values.dueDate) errors.dueDate = 'Due date is required.';
+  else if (!/^\d{4}-\d{2}-\d{2}$/.test(values.dueDate)) errors.dueDate = 'Enter a valid date.';
+  return errors;
+}
+
+export default function TaskForm({ open, onClose, task, defaultSubjectId }) {
+  const { subjects, addTask, updateTask } = useApp();
+  const isEditing = Boolean(task);
+
+  const [values, setValues] = useState(EMPTY);
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState(false);
