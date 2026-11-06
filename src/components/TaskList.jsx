@@ -14,3 +14,22 @@ export default function TaskList({ tasks, view = 'list', onEdit, onAdd, emptyTit
       />
     );
   }
+
+    if (view === 'card') {
+    return (
+      <div className="task-card-grid">
+        {tasks.map((task) => (
+          <TaskCard key={task.id} task={task} view="card" onEdit={onEdit} />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="task-list">
+      {tasks.map((task) => (
+        <TaskCard key={task.id} task={task} view="list" onEdit={onEdit} />
+      ))}
+    </div>
+  );
+}
