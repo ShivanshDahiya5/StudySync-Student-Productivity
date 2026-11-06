@@ -131,3 +131,38 @@ export default function TaskForm({ open, onClose, task, defaultSubjectId }) {
             </div>
           ) : null}
         </div>
+
+        <div className="field">
+          <label className="form-label" htmlFor="task-desc">
+            Description
+          </label>
+          <textarea
+            id="task-desc"
+            className="form-textarea"
+            value={values.description}
+            onChange={set('description')}
+            placeholder="Optional notes or details…"
+            rows={3}
+          />
+        </div>
+
+        <div className="field-row">
+          <div className="field">
+            <label className="form-label" htmlFor="task-subject">
+              Subject<span className="req">*</span>
+            </label>
+            <select
+              id="task-subject"
+              className={`form-select${errors.subjectId ? ' error' : ''}`}
+              value={values.subjectId}
+              onChange={set('subjectId')}
+              onBlur={blur('subjectId')}
+              aria-invalid={Boolean(errors.subjectId)}
+            >
+              <option value="">Select a subject…</option>
+              {subjects.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
