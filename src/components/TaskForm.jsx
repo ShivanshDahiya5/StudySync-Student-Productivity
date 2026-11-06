@@ -72,3 +72,41 @@ export default function TaskForm({ open, onClose, task, defaultSubjectId }) {
     setErrors(found);
     setTouched(true);
     if (Object.keys(found).length > 0) return;
+
+    const payload = {
+      title: values.title.trim(),
+      description: values.description.trim(),
+      subjectId: values.subjectId,
+      dueDate: values.dueDate,
+      priority: values.priority,
+      status: values.status,
+    };
+
+    if (isEditing) updateTask(task.id, payload);
+    else addTask(payload);
+    onClose();
+  };
+
+  return (
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={isEditing ? 'Edit Task' : 'Add New Task'}
+      footer={
+        <>
+          <button type="button" className="btn btn-secondary" onClick={onClose}>
+            Cancel
+          </button>
+          <button type="submit" form="task-form" className="btn btn-primary">
+            {isEditing ? 'Save Changes' : 'Save Task'}
+          </button>
+        </>
+      }
+    >
+      {subjects.length === 0 ? (
+        <div className="form-error" style={{ marginBottom: 14 }}>
+          <AlertCircle size={14} />
+          No subjects yet. Add a subject on the Subjects page before creating tasks.
+        </div>
+      ) : null}
+
