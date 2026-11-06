@@ -166,3 +166,49 @@ export default function TaskForm({ open, onClose, task, defaultSubjectId }) {
                 </option>
               ))}
             </select>
+            {errors.subjectId ? (
+              <div className="form-error">
+                <AlertCircle size={13} /> {errors.subjectId}
+              </div>
+            ) : null}
+          </div>
+
+          <div className="field">
+            <label className="form-label" htmlFor="task-due">
+              Due date<span className="req">*</span>
+            </label>
+            <input
+              id="task-due"
+              type="date"
+              className={`form-input${errors.dueDate ? ' error' : ''}`}
+              value={values.dueDate}
+              onChange={set('dueDate')}
+              onBlur={blur('dueDate')}
+              aria-invalid={Boolean(errors.dueDate)}
+            />
+            {errors.dueDate ? (
+              <div className="form-error">
+                <AlertCircle size={13} /> {errors.dueDate}
+              </div>
+            ) : null}
+          </div>
+        </div>
+
+        <div className="field-row">
+          <div className="field">
+            <label className="form-label" htmlFor="task-priority">
+              Priority
+            </label>
+            <select
+              id="task-priority"
+              className="form-select"
+              value={values.priority}
+              onChange={set('priority')}
+            >
+              {PRIORITIES.map((p) => (
+                <option key={p} value={p}>
+                  {p}
+                </option>
+              ))}
+            </select>
+          </div>
