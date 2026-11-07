@@ -174,3 +174,22 @@ export default function Dashboard() {
                 Analytics <ArrowRight size={14} />
               </Link>
             </div>
+            <div className="card-body" style={{ paddingTop: 10 }}>
+              {recentDone.length === 0 ? (
+                <p style={{ color: 'var(--text-muted)', fontSize: 13.5 }}>
+                  Completed tasks will appear here with their completion date.
+                </p>
+              ) : (
+                recentDone.map((t) => {
+                  const subject = getSubject(t.subjectId);
+                  return (
+                    <div key={t.id} className="day-task-item">
+                      <button
+                        type="button"
+                        className="task-check done"
+                        style={{ marginTop: 2 }}
+                        onClick={() => toggleTaskStatus(t.id)}
+                        aria-label={`Mark ${t.title} as pending`}
+                      >
+                        <CheckCircle2 size={12} />
+                      </button>
