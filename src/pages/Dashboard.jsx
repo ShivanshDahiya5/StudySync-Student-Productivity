@@ -156,3 +156,21 @@ export default function Dashboard() {
                   actionLabel="Add Task"
                   onAction={() => setQuickAddOpen(true)}
                 />
+              ) : (
+                <TaskList
+                  tasks={dueToday}
+                  onAdd={() => setQuickAddOpen(true)}
+                  emptyTitle="Nothing due today"
+                  emptyText="Add a task with today's due date to see it here."
+                />
+              )}
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="card-header">
+              <h2 className="card-title">Recently completed</h2>
+              <Link to="/analytics" className="btn btn-ghost btn-sm">
+                Analytics <ArrowRight size={14} />
+              </Link>
+            </div>
