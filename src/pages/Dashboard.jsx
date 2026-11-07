@@ -45,3 +45,18 @@ export default function Dashboard() {
   const perSubject = useMemo(() => subjectStats(tasks), [tasks]);
 
   const chartTrend = trend.map((d) => ({ name: d.label, Completed: d.completed, Created: d.created }));
+
+  const chartSubjects = subjects
+    .map((s) => ({
+      name: s.name.length > 12 ? `${s.name.slice(0, 11)}…` : s.name,
+      Completed: perSubject[s.id]?.completed || 0,
+      Pending: perSubject[s.id]?.pending || 0,
+      color: s.color,
+    }))
+    .filter((d) => d.Completed + d.Pending > 0);
+
+  const pieData = [
+    { name: 'Completed', value: stats.completed, color: 'var(--success)' },
+    { name: 'Pending', value: stats.pending - tasks.filter((t) => t.status === 'In Progress').length, color: 'var(--warning)' },
+    { name: 'In Progress', value: tasks.filter((t) => t.status === 'In Progress').length, color: 'var(--info)' },
+  ].filter((d) => d.value > 0);
