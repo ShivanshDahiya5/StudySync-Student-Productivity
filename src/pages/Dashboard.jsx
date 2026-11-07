@@ -139,3 +139,20 @@ export default function Dashboard() {
                 View all <ArrowRight size={14} />
               </Link>
             </div>
+            <div style={{ marginTop: 10 }}>
+              {tasks.length === 0 ? (
+                <EmptyState
+                  icon={ListChecks}
+                  title="No tasks yet"
+                  text="Create your first assignment or study task and it will show up here."
+                  actionLabel="Create your first task"
+                  onAction={() => setQuickAddOpen(true)}
+                />
+              ) : dueToday.length === 0 ? (
+                <EmptyState
+                  icon={CalendarClock}
+                  title="Nothing due today"
+                  text="You have no deadlines for today. Check upcoming deadlines or add a new task."
+                  actionLabel="Add Task"
+                  onAction={() => setQuickAddOpen(true)}
+                />
