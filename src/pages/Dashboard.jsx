@@ -32,3 +32,16 @@ import {
   motivationalMessage,
 } from '../utils/taskUtils';
 import { isTaskOverdue, formatDate, dueLabel } from '../utils/dateUtils';
+
+export default function Dashboard() {
+  const { tasks, subjects, getSubject, settings, toggleTaskStatus } = useApp();
+  const [quickAddOpen, setQuickAddOpen] = useState(false);
+
+  const stats = useMemo(() => computeStats(tasks), [tasks]);
+  const dueToday = useMemo(() => tasksDueToday(tasks), [tasks]);
+  const upcoming = useMemo(() => upcomingDeadlines(tasks, 5), [tasks]);
+  const recentDone = useMemo(() => recentlyCompleted(tasks, 5), [tasks]);
+  const trend = useMemo(() => weeklyCompletionTrend(tasks), [tasks]);
+  const perSubject = useMemo(() => subjectStats(tasks), [tasks]);
+
+  const chartTrend = trend.map((d) => ({ name: d.label, Completed: d.completed, Created: d.created }));
