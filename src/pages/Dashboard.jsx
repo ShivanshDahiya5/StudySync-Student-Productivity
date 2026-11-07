@@ -85,3 +85,29 @@ export default function Dashboard() {
         <StatCard label="Overdue" value={stats.overdue} icon={AlertTriangle} tone="red" />
         <StatCard label="Completion" value={`${stats.completionRate}%`} icon={Percent} tone="sky" />
       </div>
+
+      {tasks.length > 0 ? (
+        <div className="chart-grid" style={{ marginTop: 20 }}>
+          <ChartCard title="Weekly productivity" subtitle="Tasks created vs. completed over the last 7 days">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={chartTrend} barGap={4}>
+                <XAxis dataKey="name" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fontSize: 12 }} axisLine={false} tickLine={false} allowDecimals={false} width={30} />
+                <Tooltip cursor={{ fill: 'var(--surface-2)' }} />
+                <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 12.5 }} />
+                <Bar dataKey="Created" fill="var(--primary)" radius={[5, 5, 0, 0]} />
+                <Bar dataKey="Completed" fill="var(--success)" radius={[5, 5, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </ChartCard>
+
+          <ChartCard
+            title="Completion by subject"
+            subtitle="How each subject is tracking"
+          >
+            {chartSubjects.length === 0 ? (
+              <EmptyState
+                icon={ListChecks}
+                title="No subject data yet"
+                text="Assign a subject to your tasks to see this breakdown."
+              />
