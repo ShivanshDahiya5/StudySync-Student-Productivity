@@ -193,3 +193,24 @@ export default function Dashboard() {
                       >
                         <CheckCircle2 size={12} />
                       </button>
+<div style={{ flex: 1, minWidth: 0 }}>
+                        <div className="task-title done" style={{ fontSize: 13.5 }}>
+                          {t.title}
+                        </div>
+                        <div className="task-meta" style={{ marginTop: 4, gap: 8 }}>
+                          {subject ? (
+                            <span className="subject-chip">
+                              <span className="subject-dot" style={{ background: subject.color }} />
+                              {subject.name}
+                            </span>
+                          ) : null}
+                          <span>Completed {formatDate(t.completedAt ? t.completedAt.slice(0, 10) : t.dueDate)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          </div>
+        </div>
