@@ -60,3 +60,28 @@ export default function Dashboard() {
     { name: 'Pending', value: stats.pending - tasks.filter((t) => t.status === 'In Progress').length, color: 'var(--warning)' },
     { name: 'In Progress', value: tasks.filter((t) => t.status === 'In Progress').length, color: 'var(--info)' },
   ].filter((d) => d.value > 0);
+
+  return (
+    <>
+      <div className="page-head">
+        <div>
+          <h1>Hello, {settings.displayName || 'Student'} 👋</h1>
+          <p>Here is what your academic world looks like today.</p>
+        </div>
+        <button type="button" className="btn btn-primary" onClick={() => setQuickAddOpen(true)}>
+          <Plus size={16} /> Quick Add Task
+        </button>
+      </div>
+
+      <div className="motivation-banner">
+        <Zap size={18} aria-hidden="true" />
+        <span>{motivationalMessage(stats, dueToday.length)}</span>
+      </div>
+
+      <div className="stat-grid">
+        <StatCard label="Total Tasks" value={stats.total} icon={ListChecks} tone="indigo" />
+        <StatCard label="Pending" value={stats.pending} icon={Clock} tone="amber" />
+        <StatCard label="Completed" value={stats.completed} icon={CheckCircle2} tone="green" />
+        <StatCard label="Overdue" value={stats.overdue} icon={AlertTriangle} tone="red" />
+        <StatCard label="Completion" value={`${stats.completionRate}%`} icon={Percent} tone="sky" />
+      </div>
