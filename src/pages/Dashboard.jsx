@@ -111,3 +111,31 @@ export default function Dashboard() {
                 title="No subject data yet"
                 text="Assign a subject to your tasks to see this breakdown."
               />
+            ) : (
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartSubjects} layout="vertical" barSize={14}>
+                  <XAxis type="number" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} allowDecimals={false} />
+                  <YAxis type="category" dataKey="name" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} width={100} />
+                  <Tooltip cursor={{ fill: 'var(--surface-2)' }} />
+                  <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 12.5 }} />
+                  <Bar dataKey="Completed" stackId="a" fill="var(--success)" radius={[0, 0, 0, 0]} />
+                  <Bar dataKey="Pending" stackId="a" fill="var(--warning)" radius={[0, 5, 5, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            )}
+          </ChartCard>
+        </div>
+      ) : null}
+
+      <div className="dash-grid">
+        <div className="dash-col">
+          <div className="card">
+            <div className="card-header">
+              <h2 className="card-title">
+                <Zap size={17} aria-hidden="true" style={{ color: 'var(--primary)' }} />
+                Today&apos;s tasks
+              </h2>
+              <Link to="/tasks" className="btn btn-ghost btn-sm">
+                View all <ArrowRight size={14} />
+              </Link>
+            </div>
