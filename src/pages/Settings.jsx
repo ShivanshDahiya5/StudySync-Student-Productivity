@@ -19,3 +19,28 @@ function Switch({ on, onChange, label }) {
     </button>
   );
 }
+
+export default function Settings() {
+  const {
+    tasks, subjects, settings, updateSettings,
+    importBackup, resetAllData, pushToast, confirmAction,
+  } = useApp();
+
+  const fileRef = useRef(null);
+  const [nameDraft, setNameDraft] = useState(settings.displayName);
+  const [nameError, setNameError] = useState('');
+
+  const saveName = () => {
+    const trimmed = nameDraft.trim();
+    if (!trimmed) {
+      setNameError('Display name cannot be empty.');
+      return;
+    }
+    if (trimmed.length > 40) {
+      setNameError('Keep it under 40 characters.');
+      return;
+    }
+    setNameError('');
+    updateSettings({ displayName: trimmed });
+    pushToast('Profile saved.');
+  };
