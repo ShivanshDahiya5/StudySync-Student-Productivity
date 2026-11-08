@@ -85,3 +85,40 @@ export default function Settings() {
           <p>Personalize StudySync and manage your local data.</p>
         </div>
       </div>
+      <div className="card settings-section">
+        <div className="card-header">
+          <h2 className="card-title">
+            <User size={17} aria-hidden="true" style={{ color: 'var(--primary)' }} />
+            Profile &amp; appearance
+          </h2>
+        </div>
+        <div style={{ marginTop: 14 }}>
+          <div className="setting-row">
+            <div className="setting-info">
+              <h4>Display name</h4>
+              <p>Used for the dashboard greeting and your avatar initials.</p>
+            </div>
+            <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+              <div>
+                <input
+                  className={`form-input${nameError ? ' error' : ''}`}
+                  style={{ width: 210 }}
+                  value={nameDraft}
+                  onChange={(e) => {
+                    setNameDraft(e.target.value);
+                    setNameError('');
+                  }}
+                  aria-label="Display name"
+                  maxLength={40}
+                />
+                {nameError ? (
+                  <div className="form-error">
+                    <AlertCircle size={13} /> {nameError}
+                  </div>
+                ) : null}
+              </div>
+              <button type="button" className="btn btn-primary" onClick={saveName}>
+                <Save size={15} /> Save
+              </button>
+            </div>
+          </div>
