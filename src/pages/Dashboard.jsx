@@ -260,3 +260,23 @@ export default function Dashboard() {
                         className="subject-dot"
                         style={{ background: subject?.color || 'var(--primary)', marginTop: 7 }}
                       />
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div className="task-title" style={{ fontSize: 13.5 }}>
+                          {t.title}
+                        </div>
+                        <div className="task-meta" style={{ marginTop: 4, gap: 7 }}>
+                          <span className={`task-meta-item${overdue ? ' overdue' : ''}`}>
+                            {formatDate(t.dueDate)} · {dueLabel(t.dueDate)}
+                          </span>
+                          <PriorityBadge priority={t.priority} />
+                          <StatusBadge status={t.status} overdue={overdue} />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
