@@ -214,3 +214,27 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+
+        <div className="dash-col">
+          {pieData.length > 0 ? (
+            <ChartCard title="Task status" subtitle="Live breakdown of all your tasks">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    dataKey="value"
+                    nameKey="name"
+                    innerRadius={58}
+                    outerRadius={92}
+                    paddingAngle={3}
+                  >
+                    {pieData.map((d) => (
+                      <Cell key={d.name} fill={d.color} stroke="none" />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 12.5 }} />
+                </PieChart>
+              </ResponsiveContainer>
+            </ChartCard>
+          ) : null}
