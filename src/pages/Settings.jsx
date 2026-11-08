@@ -65,3 +65,23 @@ export default function Settings() {
         pushToast(check.error, 'error');
         return;
       }
+      const ok = await confirmAction({
+        title: 'Replace current data?',
+        message: `Importing will replace your current data with ${check.data.tasks.length} task(s) and ${check.data.subjects.length} subject(s) from the backup. This cannot be undone.`,
+        confirmLabel: 'Import & replace',
+      });
+      if (!ok) return;
+      importBackup(raw);
+    } catch (err) {
+      pushToast(err.message || 'Could not import that file.', 'error');
+    }
+  };
+
+  return (
+    <>
+      <div className="page-head">
+        <div>
+          <h1>Settings</h1>
+          <p>Personalize StudySync and manage your local data.</p>
+        </div>
+      </div>
