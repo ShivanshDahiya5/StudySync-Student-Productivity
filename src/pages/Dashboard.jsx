@@ -193,7 +193,7 @@ export default function Dashboard() {
                       >
                         <CheckCircle2 size={12} />
                       </button>
-<div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ flex: 1, minWidth: 0 }}>
                         <div className="task-title done" style={{ fontSize: 13.5 }}>
                           {t.title}
                         </div>
@@ -280,3 +280,12 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      <TaskForm
+        open={quickAddOpen}
+        onClose={() => setQuickAddOpen(false)}
+        defaultSubjectId={subjects[0]?.id}
+      />
+    </>
+  );
+}
