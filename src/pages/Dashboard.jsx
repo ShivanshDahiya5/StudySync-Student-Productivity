@@ -238,3 +238,25 @@ export default function Dashboard() {
               </ResponsiveContainer>
             </ChartCard>
           ) : null}
+          <div className="card">
+            <div className="card-header">
+              <h2 className="card-title">Upcoming deadlines</h2>
+              <Link to="/calendar" className="btn btn-ghost btn-sm">
+                Calendar <ArrowRight size={14} />
+              </Link>
+            </div>
+            <div className="card-body" style={{ paddingTop: 10 }}>
+              {upcoming.length === 0 ? (
+                <p style={{ color: 'var(--text-muted)', fontSize: 13.5 }}>
+                  No upcoming deadlines. Great time to get ahead!
+                </p>
+              ) : (
+                upcoming.map((t) => {
+                  const subject = getSubject(t.subjectId);
+                  const overdue = isTaskOverdue(t);
+                  return (
+                    <div key={t.id} className="day-task-item">
+                      <span
+                        className="subject-dot"
+                        style={{ background: subject?.color || 'var(--primary)', marginTop: 7 }}
+                      />
