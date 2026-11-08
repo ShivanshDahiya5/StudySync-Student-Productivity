@@ -44,3 +44,24 @@ export default function Settings() {
     updateSettings({ displayName: trimmed });
     pushToast('Profile saved.');
   };
+
+  const exportData = () => {
+    const backup = buildBackup(tasks, subjects, settings);
+    const stamp = new Date().toISOString().slice(0, 10);
+    downloadJSON(backup, `studysync-backup-${stamp}.json`);
+    pushToast('Backup downloaded as JSON.');
+  };
+
+  const handleImportClick = () => fileRef.current?.click();
+
+  const handleImportFile = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    try {
+      const raw = await readFileAsJSON(file);
+      const check = validateBackup(raw);
+      if (!check.valid) {
+        pushToast(check.error, 'error');
+        return;
+      }
