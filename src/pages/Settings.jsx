@@ -137,3 +137,26 @@ export default function Settings() {
               />
             </div>
           </div>
+
+          <div className="setting-row">
+            <div className="setting-info">
+              <h4>Week starts on</h4>
+              <p>Controls the layout of the calendar grid.</p>
+            </div>
+            <select
+              className="form-select"
+              style={{ width: 160 }}
+              value={settings.weekStartsOn}
+              onChange={(e) => updateSettings({ weekStartsOn: Number(e.target.value) })}
+              aria-label="Week start day"
+            >
+              <option value={0}>Sunday</option>
+              <option value={1}>Monday</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div className="card settings-section">
+        <div className="card-header">
+          <h2 className="card-title">
