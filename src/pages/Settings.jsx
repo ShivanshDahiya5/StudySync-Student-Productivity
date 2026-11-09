@@ -238,3 +238,23 @@ export default function Settings() {
           <div className="setting-row">
             <div className="setting-info">
               <h4>Reset all data</h4>
+              <p>
+                Permanently deletes every task, subject and preference stored in this browser and
+                restores the starter subjects. This cannot be undone — export a backup first if you
+                might need your data.
+              </p>
+            </div>
+            <button type="button" className="btn btn-danger" onClick={resetAllData}>
+              <Trash2 size={15} /> Reset Everything
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p style={{ fontSize: 12.5, color: 'var(--text-muted)', textAlign: 'center', marginTop: 8 }}>
+        StudySync stores everything in your browser&apos;s localStorage. No accounts, no servers, no
+        data leaves your device.
+      </p>
+    </>
+  );
+}
