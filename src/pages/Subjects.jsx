@@ -23,3 +23,22 @@ function SubjectModal({ open, onClose, subject }) {
     setInitialized(true);
   }
   if (!open && initialized) setInitialized(false);
+
+  const submit = (e) => {
+    e.preventDefault();
+    const trimmed = name.trim();
+    if (!trimmed) {
+      setError('Subject name is required.');
+      return;
+    }
+    if (trimmed.length > 60) {
+      setError('Name must be under 60 characters.');
+      return;
+    }
+    const result = isEditing ? updateSubject(subject.id, trimmed, color) : addSubject(trimmed, color);
+    if (result === null || result === false) {
+      setError('A subject with this name already exists.');
+      return;
+    }
+    onClose();
+  };
