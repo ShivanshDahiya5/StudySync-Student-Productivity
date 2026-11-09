@@ -59,3 +59,27 @@ function SubjectModal({ open, onClose, subject }) {
           </button>
         </>
       }
+    >
+      <form id="subject-form" onSubmit={submit} noValidate>
+        <div className="field">
+          <label className="form-label" htmlFor="subject-name">
+            Subject name<span className="req">*</span>
+          </label>
+          <input
+            id="subject-name"
+            className={`form-input${error ? ' error' : ''}`}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              setError('');
+            }}
+            placeholder="e.g. Operating Systems"
+            autoFocus
+            aria-invalid={Boolean(error)}
+          />
+          {error ? (
+            <div className="form-error">
+              <AlertCircle size={13} /> {error}
+            </div>
+          ) : null}
+        </div>
