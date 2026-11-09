@@ -160,3 +160,25 @@ export default function Settings() {
       <div className="card settings-section">
         <div className="card-header">
           <h2 className="card-title">
+            <Bell size={17} aria-hidden="true" style={{ color: 'var(--primary)' }} />
+            Notifications
+          </h2>
+        </div>
+        <div style={{ marginTop: 14 }}>
+          <div className="setting-row">
+            <div className="setting-info">
+              <h4>In-app reminders</h4>
+              <p>
+                Show a reminder toast when you open the app if tasks are due today or overdue.
+                <strong> Note:</strong> this is a frontend-only application — reminders only appear
+                while the app is open in your browser. It cannot notify you when the tab is closed.
+              </p>
+            </div>
+            <Switch
+              on={settings.notifications}
+              onChange={(on) => updateSettings({ notifications: on })}
+              label="Toggle in-app reminders"
+            />
+          </div>
+        </div>
+      </div>
