@@ -42,3 +42,20 @@ function SubjectModal({ open, onClose, subject }) {
     }
     onClose();
   };
+
+  return (
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={isEditing ? 'Edit Subject' : 'Add Subject'}
+      small
+      footer={
+        <>
+          <button type="button" className="btn btn-secondary" onClick={onClose}>
+            Cancel
+          </button>
+          <button type="submit" form="subject-form" className="btn btn-primary">
+            {isEditing ? 'Save Changes' : 'Add Subject'}
+          </button>
+        </>
+      }
