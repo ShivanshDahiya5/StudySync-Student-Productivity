@@ -212,3 +212,29 @@ export default function Settings() {
                 is valid it replaces the current data in this browser.
               </p>
             </div>
+            <button type="button" className="btn btn-secondary" onClick={handleImportClick}>
+              <Upload size={15} /> Import JSON
+            </button>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="application/json,.json"
+              style={{ display: 'none' }}
+              onChange={handleImportFile}
+              aria-label="Import JSON backup"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="card settings-section danger-zone">
+        <div className="card-header">
+          <h2 className="card-title" style={{ color: 'var(--danger)' }}>
+            <Trash2 size={17} aria-hidden="true" />
+            Danger zone
+          </h2>
+        </div>
+        <div style={{ marginTop: 14 }}>
+          <div className="setting-row">
+            <div className="setting-info">
+              <h4>Reset all data</h4>
