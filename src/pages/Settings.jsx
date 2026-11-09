@@ -122,3 +122,18 @@ export default function Settings() {
               </button>
             </div>
           </div>
+
+          <div className="setting-row">
+            <div className="setting-info">
+              <h4>Dark theme</h4>
+              <p>Switch between the light and dark interface. Your choice is remembered in this browser.</p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              {settings.theme === 'dark' ? <Moon size={17} /> : <Sun size={17} />}
+              <Switch
+                on={settings.theme === 'dark'}
+                onChange={(on) => updateSettings({ theme: on ? 'dark' : 'light' })}
+                label="Toggle dark theme"
+              />
+            </div>
+          </div>
