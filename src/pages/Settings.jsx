@@ -182,3 +182,33 @@ export default function Settings() {
           </div>
         </div>
       </div>
+
+      <div className="card settings-section">
+        <div className="card-header">
+          <h2 className="card-title">
+            <Download size={17} aria-hidden="true" style={{ color: 'var(--primary)' }} />
+            Data backup
+          </h2>
+        </div>
+        <div style={{ marginTop: 14 }}>
+          <div className="setting-row">
+            <div className="setting-info">
+              <h4>Export data</h4>
+              <p>
+                Download all {tasks.length} task(s), {subjects.length} subject(s) and your settings
+                as a JSON file. Last change saved locally.
+              </p>
+            </div>
+            <button type="button" className="btn btn-secondary" onClick={exportData}>
+              <Download size={15} /> Export JSON
+            </button>
+          </div>
+
+          <div className="setting-row">
+            <div className="setting-info">
+              <h4>Import data</h4>
+              <p>
+                Restore from a previously exported JSON backup. The file is validated first; if it
+                is valid it replaces the current data in this browser.
+              </p>
+            </div>
