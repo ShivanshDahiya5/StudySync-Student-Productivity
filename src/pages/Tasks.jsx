@@ -27,3 +27,21 @@ export default function Tasks() {
   const [view, setView] = useState('list');
   const [formOpen, setFormOpen] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
+
+  const paramQuery = searchParams.get('q') || '';
+  useEffect(() => {
+    setFilters((prev) => (prev.search === paramQuery ? prev : { ...prev, search: paramQuery }));
+  }, [paramQuery]);
+
+  const handleFiltersChange = useCallback((next) => {
+    setFilters(next);
+    setSearchParams(
+      next.search ? { q: next.search } : {},
+      { replace: true }
+    );
+  }, [setSearchParams]);
+
+  const visibleTasks = useMemo(
+    () => filterAndSortTasks(tasks, filters, sort),
+    [tasks, filters, sort]
+  );
