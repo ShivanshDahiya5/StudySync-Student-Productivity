@@ -83,3 +83,26 @@ function SubjectModal({ open, onClose, subject }) {
             </div>
           ) : null}
         </div>
+
+        <div className="field" style={{ marginBottom: 4 }}>
+          <span className="form-label" id="subject-color-label">
+            Color
+          </span>
+          <div className="color-swatches" role="group" aria-labelledby="subject-color-label">
+            {subjectColors.map((c) => (
+              <button
+                key={c}
+                type="button"
+                className={`color-swatch${color === c ? ' selected' : ''}`}
+                style={{ background: c }}
+                onClick={() => setColor(c)}
+                aria-label={`Choose color ${c}`}
+                aria-pressed={color === c}
+              />
+            ))}
+          </div>
+        </div>
+      </form>
+    </Modal>
+  );
+}
