@@ -55,3 +55,17 @@ export default function Tasks() {
     setEditingTask(task);
     setFormOpen(true);
   };
+
+  return (
+    <>
+      <div className="page-head">
+        <div>
+          <h1>My Tasks</h1>
+          <p>
+            {visibleTasks.length} of {tasks.length} task{tasks.length === 1 ? '' : 's'} shown
+          </p>
+        </div>
+        <button type="button" className="btn btn-primary" onClick={openAdd}>
+          <Plus size={16} /> Add Task
+        </button>
+      </div>
