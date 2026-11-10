@@ -45,3 +45,13 @@ export default function Tasks() {
     () => filterAndSortTasks(tasks, filters, sort),
     [tasks, filters, sort]
   );
+
+  const openAdd = () => {
+    setEditingTask(null);
+    setFormOpen(true);
+  };
+
+  const openEdit = (task) => {
+    setEditingTask(task);
+    setFormOpen(true);
+  };
