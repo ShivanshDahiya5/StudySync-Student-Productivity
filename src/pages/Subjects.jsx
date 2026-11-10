@@ -106,3 +106,20 @@ function SubjectModal({ open, onClose, subject }) {
     </Modal>
   );
 }
+
+export default function Subjects() {
+  const { subjects, tasks, deleteSubject } = useApp();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [editing, setEditing] = useState(null);
+
+  const stats = useMemo(() => subjectStats(tasks), [tasks]);
+
+  const openAdd = () => {
+    setEditing(null);
+    setModalOpen(true);
+  };
+
+  const openEdit = (subject) => {
+    setEditing(subject);
+    setModalOpen(true);
+  };
