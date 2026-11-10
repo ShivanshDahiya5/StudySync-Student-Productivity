@@ -69,3 +69,24 @@ export default function Tasks() {
           <Plus size={16} /> Add Task
         </button>
       </div>
+
+      <div className="card">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, paddingRight: 20 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <TaskFilters
+              filters={filters}
+              sort={sort}
+              onFiltersChange={handleFiltersChange}
+              onSortChange={setSort}
+            />
+          </div>
+          <div className="view-toggle" role="group" aria-label="Change task view">
+            <button
+              type="button"
+              className={view === 'list' ? 'active' : ''}
+              onClick={() => setView('list')}
+              aria-label="List view"
+              aria-pressed={view === 'list'}
+            >
+              <ListChecks size={16} />
+            </button>
