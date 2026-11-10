@@ -14,3 +14,16 @@ const DEFAULT_FILTERS = {
   status: 'all',
   due: 'all',
 };
+
+export default function Tasks() {
+  const { tasks } = useApp();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [filters, setFilters] = useState(() => ({
+    ...DEFAULT_FILTERS,
+    search: searchParams.get('q') || '',
+  }));
+  const [sort, setSort] = useState('dueDate');
+  const [view, setView] = useState('list');
+  const [formOpen, setFormOpen] = useState(false);
+  const [editingTask, setEditingTask] = useState(null);
