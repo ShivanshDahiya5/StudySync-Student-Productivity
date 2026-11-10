@@ -90,3 +90,20 @@ export default function Tasks() {
             >
               <ListChecks size={16} />
             </button>
+            <button
+              type="button"
+              className={view === 'card' ? 'active' : ''}
+              onClick={() => setView('card')}
+              aria-label="Card view"
+              aria-pressed={view === 'card'}
+            >
+              <LayoutGrid size={16} />
+            </button>
+          </div>
+        </div>
+
+        <TaskList
+          tasks={visibleTasks}
+          view={view}
+          onEdit={openEdit}
+          onAdd={openAdd}
