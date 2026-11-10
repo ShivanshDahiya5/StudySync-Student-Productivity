@@ -146,3 +146,28 @@ export default function Subjects() {
             onAction={openAdd}
           />
         </div>
+      ) : (
+        <div className="subject-grid">
+          {subjects.map((subject) => (
+            <SubjectCard
+              key={subject.id}
+              subject={subject}
+              stats={stats[subject.id] || { total: 0, completed: 0, pending: 0 }}
+              onEdit={openEdit}
+              onDelete={deleteSubject}
+            />
+          ))}
+        </div>
+      )}
+
+      <SubjectModal
+        open={modalOpen}
+        onClose={() => {
+          setModalOpen(false);
+          setEditing(null);
+        }}
+        subject={editing}
+      />
+    </>
+  );
+}
