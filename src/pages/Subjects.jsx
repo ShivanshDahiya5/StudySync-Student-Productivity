@@ -123,3 +123,26 @@ export default function Subjects() {
     setEditing(subject);
     setModalOpen(true);
   };
+
+  return (
+    <>
+      <div className="page-head">
+        <div>
+          <h1>Subjects</h1>
+          <p>Organize your tasks by course or category. {subjects.length} subject{subjects.length === 1 ? '' : 's'} total.</p>
+        </div>
+        <button type="button" className="btn btn-primary" onClick={openAdd}>
+          <Plus size={16} /> Add Subject
+        </button>
+      </div>
+
+      {subjects.length === 0 ? (
+        <div className="card">
+          <EmptyState
+            icon={BookOpen}
+            title="No subjects yet"
+            text="Subjects group your tasks by course — for example Mathematics, Physics, or Computer Science. Add one to continue."
+            actionLabel="Add your first subject"
+            onAction={openAdd}
+          />
+        </div>
