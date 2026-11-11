@@ -271,3 +271,32 @@ button { font-family: inherit; }
 .header-title-block { min-width: 0; flex: 1; }
 .header-title { font-size: 19px; font-weight: 650; }
 .header-date { font-size: 12.5px; color: var(--text-muted); }
+
+.header-search {
+  position: relative;
+  width: 260px;
+  max-width: 34vw;
+}
+
+.header-search svg {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-faint);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.header-search input {
+  width: 100%;
+  padding: 9px 12px 9px 34px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13.5px;
+  outline: none;
+  transition: border 0.15s ease, box-shadow 0.15s ease;
+}
