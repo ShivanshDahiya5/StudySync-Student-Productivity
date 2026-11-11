@@ -482,3 +482,40 @@ button { font-family: inherit; }
 [data-theme='dark'] .badge-medium { color: var(--warning); }
 .badge-low { background: var(--info-soft); color: #0369a1; }
 [data-theme='dark'] .badge-low { color: var(--info); }
+
+.badge-pending { background: var(--warning-soft); color: #b45309; }
+[data-theme='dark'] .badge-pending { color: var(--warning); }
+.badge-inprogress { background: var(--info-soft); color: #0369a1; }
+[data-theme='dark'] .badge-inprogress { color: var(--info); }
+.badge-completed { background: var(--success-soft); color: var(--success); }
+.badge-overdue { background: var(--danger-soft); color: var(--danger); }
+
+.subject-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.subject-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ---------- Forms ---------- */
+.field { margin-bottom: 16px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.form-label .req { color: var(--danger); margin-left: 2px; }
