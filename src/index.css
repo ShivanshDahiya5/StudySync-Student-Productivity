@@ -354,3 +354,33 @@ button { font-family: inherit; }
   box-shadow: var(--shadow-sm);
 }
 .btn-secondary:hover:not(:disabled) { background: var(--surface-2); border-color: var(--border-strong); }
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+.btn-danger:hover:not(:disabled) { filter: brightness(0.93); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+.btn-ghost:hover:not(:disabled) { background: var(--surface-2); color: var(--text); }
+
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: var(--radius);
+  display: inline-grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-icon:hover { background: var(--surface-2); color: var(--text); border-color: var(--border); }
+.btn-icon.danger:hover { background: var(--danger-soft); color: var(--danger); border-color: transparent; }
+
+.btn-sm { padding: 6px 11px; font-size: 12.5px; }
