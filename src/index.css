@@ -448,3 +448,37 @@ button { font-family: inherit; }
   line-height: 1.2;
   margin-top: 2px;
 }
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.stat-icon.indigo { background: var(--primary-soft); color: var(--primary); }
+.stat-icon.amber { background: var(--warning-soft); color: var(--warning); }
+.stat-icon.green { background: var(--success-soft); color: var(--success); }
+.stat-icon.red { background: var(--danger-soft); color: var(--danger); }
+.stat-icon.sky { background: var(--info-soft); color: var(--info); }
+
+/* ---------- Badges ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.badge-high { background: var(--danger-soft); color: var(--danger); }
+.badge-medium { background: var(--warning-soft); color: #b45309; }
+[data-theme='dark'] .badge-medium { color: var(--warning); }
+.badge-low { background: var(--info-soft); color: #0369a1; }
+[data-theme='dark'] .badge-low { color: var(--info); }
