@@ -1173,3 +1173,29 @@ button { font-family: inherit; }
     animation: fadeIn 0.2s ease;
   }
 
+  .app-main { margin-left: 0; }
+  .mobile-toggle { display: inline-grid; }
+
+  .header { padding: 0 18px; gap: 10px; }
+  .app-content { padding: 20px 18px 40px; }
+  .header-search { display: none; }
+}
+
+@media (max-width: 640px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .analytics-grid { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+  .stat-value { font-size: 23px; }
+  .page-head h1 { font-size: 20px; }
+  .calendar-day { min-height: 60px; padding: 5px 6px; }
+  .toolbar { padding: 14px; }
+  .task-card-grid { padding: 14px; grid-template-columns: 1fr; }
+  .modal-footer { flex-direction: column-reverse; }
+  .modal-footer .btn { width: 100%; }
+  .setting-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .header-title { font-size: 16.5px; }
+}
+
+@media (max-width: 420px) {
+  .stat-grid { grid-template-columns: 1fr; }
+}
