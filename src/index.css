@@ -1070,3 +1070,43 @@ button { font-family: inherit; }
 }
 
 .switch.on { background: var(--primary); }
+
+.switch-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease;
+}
+
+.switch.on .switch-knob { transform: translateX(19px); }
+
+.danger-zone { border-color: color-mix(in srgb, var(--danger) 40%, var(--border)); }
+
+/* ---------- Mobile nav ---------- */
+.mobile-toggle { display: none; }
+
+.sidebar-backdrop { display: none; }
+
+/* ---------- Dashboard layout ---------- */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+  align-items: start;
+}
+
+.dash-col { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 26px 0 14px;
+}
