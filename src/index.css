@@ -973,3 +973,48 @@ button { font-family: inherit; }
   color: var(--text);
   font-weight: 700;
 }
+
+.progress-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.color-swatches { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.13s ease;
+}
+.color-swatch:hover { transform: scale(1.12); }
+.color-swatch.selected { border-color: var(--text); box-shadow: 0 0 0 2px var(--surface); }
+
+/* ---------- Charts ---------- */
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.chart-wrap { width: 100%; height: 280px; }
+
+.recharts-default-tooltip {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+}
