@@ -837,3 +837,42 @@ button { font-family: inherit; }
   place-items: center;
 }
 .toast-close:hover { color: var(--text); }
+
+/* ---------- Calendar ---------- */
+.calendar-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+.calendar-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  gap: 10px;
+}
+
+.calendar-month-label { font-size: 16px; font-weight: 650; }
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-weekdays {
+  padding: 0 12px;
+  border-top: 1px solid var(--border);
+}
+
+.calendar-weekdays span {
+  padding: 10px 0;
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
