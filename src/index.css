@@ -1018,3 +1018,55 @@ button { font-family: inherit; }
   border-radius: var(--radius) !important;
   box-shadow: var(--shadow) !important;
 }
+
+/* ---------- Analytics ---------- */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.insight-list { display: flex; flex-direction: column; gap: 10px; }
+
+.insight-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+}
+
+/* ---------- Settings ---------- */
+.settings-section { margin-bottom: 20px; }
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.setting-row:first-child { border-top: none; }
+
+.setting-info h4 { font-size: 14px; font-weight: 600; }
+.setting-info p { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; max-width: 480px; }
+
+.switch {
+  position: relative;
+  width: 44px;
+  height: 25px;
+  border-radius: 999px;
+  background: var(--border-strong);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.switch.on { background: var(--primary); }
